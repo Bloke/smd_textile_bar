@@ -186,7 +186,7 @@ class smd_textile_bar
                     position=".$position
                 );
 
-                $prefs[$name] = $val;
+                $prefs[$name] = 1;
             }
 
             $position++;
@@ -197,8 +197,8 @@ class smd_textile_bar
             "name LIKE 'rah\_textile\_bar\_h_' OR name='smd_textile_bar_codeline'"
         );
 
-        set_pref('smd_textile_bar_version', $this->version,'smd_textile_bar',2,'',0);
-        $prefs['smd_textile_bar_version'] = $this->$version;
+        set_pref('smd_textile_bar_version', $this->version,'smd_textile_bar', 2, '', 0);
+        $prefs['smd_textile_bar_version'] = $this->version;
     }
 
     /**
@@ -343,6 +343,10 @@ EOCSS;
             $html[] = '<div class="smd_textile_bar">';
 
             foreach ($buttons as $key => $opts) {
+                if (!get_pref('smd_textile_bar_'.$key)) {
+                    continue;
+                }
+
                 $params = array();
 
                 foreach ($opts as $data => $val) {
