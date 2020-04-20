@@ -57,50 +57,53 @@ $plugin['flags'] = '3';
 $plugin['textpack'] = <<<EOT
 #@language en, en-gb, en-us
 #@prefs
-smd_textile_bar => Textile Bar
+smd_textile_bar => Textile bar
+smd_textile_bar_acronym => Show acronym
+smd_textile_bar_bc => Show Block code (bc)
 smd_textile_bar_body => Attach to Body field
+smd_textile_bar_bq => Show Block quote (bq)
+smd_textile_bar_btn_acronym => Acronym
+smd_textile_bar_btn_bc => Block code
+smd_textile_bar_btn_bq => Block quote
+smd_textile_bar_btn_code => Code
+smd_textile_bar_btn_del => Delete
+smd_textile_bar_btn_emphasis => Italics
 smd_textile_bar_btn_h1 => H1
 smd_textile_bar_btn_h2 => H2
 smd_textile_bar_btn_h3 => H3
 smd_textile_bar_btn_h4 => H4
 smd_textile_bar_btn_h5 => H5
 smd_textile_bar_btn_h6 => H6
-smd_textile_bar_btn_strong => Bold
-smd_textile_bar_btn_emphasis => Italics
-smd_textile_bar_btn_link => Link
-smd_textile_bar_btn_ins => Insert
-smd_textile_bar_btn_del => Delete
-smd_textile_bar_btn_sup => Superscript
-smd_textile_bar_btn_sub => Subscript
 smd_textile_bar_btn_image => Image
-smd_textile_bar_btn_code => Code
-smd_textile_bar_btn_bc => Block code
-smd_textile_bar_btn_bq => Block quote
-smd_textile_bar_btn_ul => List
+smd_textile_bar_btn_ins => Insert
+smd_textile_bar_btn_link => Link
 smd_textile_bar_btn_ol => Num list
-smd_textile_bar_btn_acronym => Acronym
-smd_textile_bar_excerpt => Attach to Excerpt field
-smd_textile_bar_strong => Show strong (bold)
-smd_textile_bar_link => Show link
-smd_textile_bar_emphasis => Show emphasis (italic)
-smd_textile_bar_ins => Show insert
+smd_textile_bar_btn_output_form => Form
+smd_textile_bar_btn_strong => Bold
+smd_textile_bar_btn_sub => Subscript
+smd_textile_bar_btn_sup => Superscript
+smd_textile_bar_btn_ul => List
+smd_textile_bar_buttons => Use buttons
+smd_textile_bar_code => Show inline code
 smd_textile_bar_del => Show delete
+smd_textile_bar_emphasis => Show emphasis (italic)
+smd_textile_bar_excerpt => Attach to Excerpt field
 smd_textile_bar_h1 => Show h1
 smd_textile_bar_h2 => Show h2
 smd_textile_bar_h3 => Show h3
 smd_textile_bar_h4 => Show h4
 smd_textile_bar_h5 => Show h5
 smd_textile_bar_h6 => Show h6
+smd_textile_bar_icons => Use icons
 smd_textile_bar_image => Show image
-smd_textile_bar_code => Show inline code
-smd_textile_bar_ul => Show unordered list (ul)
+smd_textile_bar_ins => Show insert
+smd_textile_bar_link => Show link
+smd_textile_bar_strong => Show strong (bold)
 smd_textile_bar_ol => Show ordered list (ol)
-smd_textile_bar_sup => Show supersrcipt (sup)
-smd_textile_bar_sub => Show subscript (sub)
-smd_textile_bar_bq => Show Block quote (bq)
-smd_textile_bar_bc => Show Block code (bc)
-smd_textile_bar_acronym => Show acronym
 smd_textile_bar_output_form => Show form
+smd_textile_bar_sub => Show subscript (sub)
+smd_textile_bar_sup => Show supersrcipt (sup)
+smd_textile_bar_ul => Show unordered list (ul)
 EOT;
 
 if (!defined('txpinterface'))
@@ -171,6 +174,8 @@ class smd_textile_bar
         $values = array_keys($this->buttons());
         $values[] = 'excerpt';
         $values[] = 'body';
+        $values[] = 'buttons';
+        $values[] = 'icons';
 
         foreach ($values as $n) {
             $name = 'smd_textile_bar_'.$n;
@@ -328,7 +333,7 @@ class smd_textile_bar
     display: flex;
     flex-wrap: wrap;
 }
-.smd_textile_btn {
+.smd_textile_bar--buttons {
     padding: 0.25em 0.5em;
     margin: 0.15em;
     border: 1px solid #888;
@@ -337,6 +342,11 @@ class smd_textile_bar
     color: #333;
 }
 EOCSS;
+
+        $aclass = array();
+        $aclass[] = (get_pref('smd_textile_bar_buttons')) ? 'smd_textile_bar--buttons' : '';
+        $aclass[] = (get_pref('smd_textile_bar_icons')) ? 'smd_textile_bar--icons' : 'smd_textile_bar--text';
+        $class_str = implode(' ', $aclass);
 
         foreach ($fields as $field) {
             $html = array();
@@ -353,7 +363,7 @@ EOCSS;
                     $params[] = 'data-'.$data.'="'.$val.'"';
                 }
 
-                $html[] = '<a class="smd_textile_btn" href="#'.$field.'" '.implode(' ', $params).'>'.gTxt('smd_textile_bar_btn_'.$key).'</a>';
+                $html[] = '<a class="'.$class_str.'" href="#'.$field.'" '.implode(' ', $params).'>'.gTxt('smd_textile_bar_btn_'.$key).'</a>';
 
             }
 
