@@ -59,13 +59,32 @@ $plugin['textpack'] = <<<EOT
 #@prefs
 smd_textile_bar => Textile Bar
 smd_textile_bar_body => Attach to Body field
+smd_textile_bar_btn_h1 => H1
+smd_textile_bar_btn_h2 => H2
+smd_textile_bar_btn_h3 => H3
+smd_textile_bar_btn_h4 => H4
+smd_textile_bar_btn_h5 => H5
+smd_textile_bar_btn_h6 => H6
+smd_textile_bar_btn_strong => Bold
+smd_textile_bar_btn_emphasis => Italics
+smd_textile_bar_btn_link => Link
+smd_textile_bar_btn_ins => Insert
+smd_textile_bar_btn_del => Delete
+smd_textile_bar_btn_sup => Superscript
+smd_textile_bar_btn_sub => Subscript
+smd_textile_bar_btn_image => Image
+smd_textile_bar_btn_code => Code
+smd_textile_bar_btn_bc => Block code
+smd_textile_bar_btn_bq => Block quote
+smd_textile_bar_btn_ul => List
+smd_textile_bar_btn_ol => Num list
+smd_textile_bar_btn_acronym => Acronym
 smd_textile_bar_excerpt => Attach to Excerpt field
-smd_textile_bar_strong => Show strong
+smd_textile_bar_strong => Show strong (bold)
 smd_textile_bar_link => Show link
-smd_textile_bar_emphasis => Show emphasis
-smd_textile_bar_heading => Show heading
-smd_textile_bar_ins => Show ins
-smd_textile_bar_del => Show del
+smd_textile_bar_emphasis => Show emphasis (italic)
+smd_textile_bar_ins => Show insert
+smd_textile_bar_del => Show delete
 smd_textile_bar_h1 => Show h1
 smd_textile_bar_h2 => Show h2
 smd_textile_bar_h3 => Show h3
@@ -73,14 +92,13 @@ smd_textile_bar_h4 => Show h4
 smd_textile_bar_h5 => Show h5
 smd_textile_bar_h6 => Show h6
 smd_textile_bar_image => Show image
-smd_textile_bar_codeline => Show codeline
-smd_textile_bar_pre => Show pre
-smd_textile_bar_ul => Show ul
-smd_textile_bar_ol => Show ol
-smd_textile_bar_sup => Show sup
-smd_textile_bar_sub => Show sub
-smd_textile_bar_bq => Show bq
-smd_textile_bar_bc => Show bc
+smd_textile_bar_code => Show inline code
+smd_textile_bar_ul => Show unordered list (ul)
+smd_textile_bar_ol => Show ordered list (ol)
+smd_textile_bar_sup => Show supersrcipt (sup)
+smd_textile_bar_sub => Show subscript (sub)
+smd_textile_bar_bq => Show Block quote (bq)
+smd_textile_bar_bc => Show Block code (bc)
 smd_textile_bar_acronym => Show acronym
 smd_textile_bar_output_form => Show form
 EOT;
@@ -150,7 +168,7 @@ class smd_textile_bar
 
         $position = 230;
 
-        $values = $this->buttons();
+        $values = array_keys($this->buttons());
         $values[] = 'excerpt';
         $values[] = 'body';
 
@@ -191,21 +209,92 @@ class smd_textile_bar
     public function buttons()
     {
         return array(
-            'strong',
-            'link',
-            'emphasis',
-            'ins',
-            'del',
-            'heading',
-            'image',
-            'bc',
-            'ul',
-            'ol',
-            'bq',
-            'pre',
-            'acronym',
-            'sup',
-            'sub',
+            'h1' => array(
+                'callback' => 'heading',
+                'level'    => '1',
+                ),
+            'h2' => array(
+                'callback' => 'heading',
+                'level'    => '2',
+                ),
+            'h3' => array(
+                'callback' => 'heading',
+                'level'    => '3',
+                ),
+            'h4' => array(
+                'callback' => 'heading',
+                'level'    => '4',
+                ),
+            'h5' => array(
+                'callback' => 'heading',
+                'level'    => '5',
+                ),
+            'h6' => array(
+                'callback' => 'heading',
+                'level'    => '6',
+                ),
+            'link' => array(
+                'callback' => 'link',
+                ),
+            'ul' => array(
+                'callback' => 'list',
+                'bullet'   => '*',
+                ),
+            'ol' => array(
+                'callback' => 'list',
+                'bullet'   => '#',
+                ),
+            'strong' => array(
+                'callback' => 'inline',
+                'before'   => '*',
+                'after'    => '*',
+                ),
+            'emphasis' => array(
+                'callback' => 'inline',
+                'before'   => '_',
+                'after'    => '_',
+                ),
+            'ins' => array(
+                'callback' => 'inline',
+                'before'   => '+',
+                'after'    => '+',
+                ),
+            'del' => array(
+                'callback' => 'inline',
+                'before'   => '-',
+                'after'    => '-',
+                ),
+            'sup' => array(
+                'callback' => 'inline',
+                'before'   => '^',
+                'after'    => '^',
+                ),
+            'sub' => array(
+                'callback' => 'inline',
+                'before'   => '~',
+                'after'    => '~',
+                ),
+            'image' => array(
+                'callback' => 'inline',
+                'before'   => '!',
+                'after'    => '!',
+                ),
+            'code' => array(
+                'callback' => 'inline',
+                'before'   => '@',
+                'after'    => '@',
+                ),
+            'bc' => array(
+                'callback' => 'block',
+                'tag'      => 'bc',
+                ),
+            'bq' => array(
+                'callback' => 'block',
+                'tag'      => 'bq',
+                ),
+            'acronym' => array(
+                'callback' => 'acronym',
+                ),
         );
     }
 
@@ -220,6 +309,7 @@ class smd_textile_bar
             return;
 
         $fields = array('body', 'excerpt');
+        $buttons = $this->buttons();
 
         foreach ($fields as $key => $field) {
             if (empty($prefs['smd_textile_bar_'.$field])) {
@@ -249,25 +339,25 @@ class smd_textile_bar
 EOCSS;
 
         foreach ($fields as $field) {
-            $html = <<<EOF
-                <div class="smd_textile_bar">
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="heading" data-level="h3">h#.</a>
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="link">Link</a>
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="list" data-bullet="*">List</a>
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="inline" data-before="*" data-after="*">Bold</a>
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="inline" data-before="_" data-after="_">Italic</a>
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="inline" data-before="+" data-after="+">Ins</a>
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="inline" data-before="-" data-after="-">Del</a>
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="block" data-tag="bq">Blockquote</a>
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="code" data-before="@" data-after="@">Code</a>
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="block" data-tag="pre">Pre</a>
-                    <a class="smd_textile_btn" href="#{$field}" data-callback="acronym">Abbr</a>
-                </div>
-EOF;
+            $html = array();
+            $html[] = '<div class="smd_textile_bar">';
 
+            foreach ($buttons as $key => $opts) {
+                $params = array();
+
+                foreach ($opts as $data => $val) {
+                    $params[] = 'data-'.$data.'="'.$val.'"';
+                }
+
+                $html[] = '<a class="smd_textile_btn" href="#'.$field.'" '.implode(' ', $params).'>'.gTxt('smd_textile_bar_btn_'.$key).'</a>';
+
+            }
+
+            $html[] = '</div>';
+            $html_str = implode(n, $html);
             $js .=
                 '$(document).ready(function(){'.
-                    '$("textarea#'.escape_js($field).'").before("'.escape_js($html).'")'.
+                    '$("textarea#'.escape_js($field).'").before("'.escape_js($html_str).'")'.
                 '});';
         }
 
@@ -543,7 +633,7 @@ EOF;
             }
 
             insert(
-                opt.level +'. ' + line + (!is.paragraph ? "\\n\\n" : ''),
+                'h' + opt.level +'. ' + line + (!is.paragraph ? "\\n\\n" : ''),
                 lines.start,
                 lines.end
             );
