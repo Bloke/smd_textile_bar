@@ -4,7 +4,7 @@ p. Brings a simple and minimal Quicktags Textile inserting bar to the backend. N
 
 h2. List of features
 
-* A simple Textile insertino bar, offering the most common formatting options Textile has.
+* A simple Textile insertion bar, offering the most common formatting options Textile has.
 * Easy to use and install: just run the automated plugin installation and activate.
 * Options can be configured via easy graphical user interface, located at Textpattern's Advanced Preferences panel (Textpattern / Admin / Preferences / Advanced).
 
