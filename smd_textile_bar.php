@@ -102,8 +102,8 @@ if (txpinterface === 'admin') {
     $smd_textile_bar->install();
 }
 
-class smd_textile_bar {
-
+class smd_textile_bar
+{
     protected $version = '0.1.0';
     protected $privs = '1,2';
 
@@ -125,10 +125,12 @@ class smd_textile_bar {
 
     /**
      * Installer
+     *
      * @param string $event Admin-side event.
      * @param string $step  Admin-side event, plugin-lifecycle step.
      */
-    public function install($event = '', $step = '') {
+    public function install($event = '', $step = '')
+    {
         global $prefs;
 
         if ($step == 'deleted') {
@@ -183,9 +185,11 @@ class smd_textile_bar {
 
     /**
      * Lists buttons
+     *
      * @return array Array of buttons.
      */
-    public function buttons() {
+    public function buttons()
+    {
         return array(
             'strong',
             'link',
@@ -208,7 +212,8 @@ class smd_textile_bar {
     /**
      * All the required scripts and styles.
      */
-    public function head() {
+    public function head()
+    {
         global $event, $prefs;
 
         if ($event !== 'article')
@@ -656,7 +661,8 @@ EOF;
     /**
      * Redirects to the preferences panel
      */
-    public function prefs() {
+    public function prefs()
+    {
         header('Location: ?event=prefs#prefs_group_smd_textile_bar');
         echo
             '<p id="message">'.n.
