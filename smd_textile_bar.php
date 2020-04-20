@@ -127,7 +127,7 @@ class smd_textile_bar {
 
             safe_delete(
                 'txp_prefs',
-                "name like 'rah\_textile\_bar\_%'"
+                "name like 'rah\_textile\_bar\_%' OR name like 'smd\_textile\_bar\_%'"
             );
 
             return;
