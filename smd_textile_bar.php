@@ -93,38 +93,45 @@ if (!defined('txpinterface'))
  * smd_textile_bar plugin for Textpattern CMS
  *
  * @author Stef Dawson / Jukka Svahn / Patrick Woods
- * @date 2008-
  * @license GNU GPLv2
  * @link http://github.com/Bloke/smd_textile_bar
- *
  */
 
 if (txpinterface === 'admin') {
-    smd_textile_bar::install();
-    add_privs('plugin_prefs.smd_textile_bar', '1,2');
-    add_privs('smd_textile_bar', '1,2');
-    add_privs('prefs.smd_textile_bar', '1,2');
-    register_callback(array('smd_textile_bar', 'prefs'), 'plugin_prefs.smd_textile_bar');
-    register_callback(array('smd_textile_bar', 'install'), 'plugin_lifecycle.smd_textile_bar');
-    register_callback(array('smd_textile_bar', 'head'), 'admin_side', 'head_end');
+    $smd_textile_bar = new smd_textile_bar();
+    $smd_textile_bar->install();
 }
 
 class smd_textile_bar {
 
-    static public $version = '0.7';
+    protected $version = '0.1.0';
+    protected $privs = '1,2';
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        add_privs('plugin_prefs.smd_textile_bar', $this->privs);
+        add_privs('smd_textile_bar', $this->privs);
+        add_privs('prefs.smd_textile_bar', $this->privs);
+
+        register_callback(array($this, 'prefs'), 'plugin_prefs.smd_textile_bar');
+        register_callback(array($this, 'install'), 'plugin_lifecycle.smd_textile_bar');
+        register_callback(array($this, 'head'), 'admin_side', 'head_end');
+
+        $this->install();
+    }
 
     /**
      * Installer
      * @param string $event Admin-side event.
-     * @param string $step Admin-side event, plugin-lifecycle step.
+     * @param string $step  Admin-side event, plugin-lifecycle step.
      */
-
-    static public function install($event='', $step='') {
-
+    public function install($event = '', $step = '') {
         global $prefs;
 
-        if($step == 'deleted') {
-
+        if ($step == 'deleted') {
             safe_delete(
                 'txp_prefs',
                 "name like 'rah\_textile\_bar\_%' OR name like 'smd\_textile\_bar\_%'"
@@ -136,20 +143,19 @@ class smd_textile_bar {
         $current = isset($prefs['smd_textile_bar_version']) ?
             $prefs['smd_textile_bar_version'] : 'base';
 
-        if($current == self::$version)
+        if ($current == $this->version)
             return;
 
         $position = 230;
 
-        $values = self::buttons();
+        $values = $this->buttons();
         $values[] = 'excerpt';
         $values[] = 'body';
 
-        foreach($values as $n) {
-
+        foreach ($values as $n) {
             $name = 'smd_textile_bar_'.$n;
 
-            if(!isset($prefs[$name])) {
+            if (!isset($prefs[$name])) {
                 safe_insert(
                     'txp_prefs',
                     "name='".doSlash($name)."',
@@ -171,16 +177,15 @@ class smd_textile_bar {
             "name LIKE 'rah\_textile\_bar\_h_' OR name='smd_textile_bar_codeline'"
         );
 
-        set_pref('smd_textile_bar_version', self::$version,'smd_textile_bar',2,'',0);
-        $prefs['smd_textile_bar_version'] = self::$version;
+        set_pref('smd_textile_bar_version', $this->version,'smd_textile_bar',2,'',0);
+        $prefs['smd_textile_bar_version'] = $this->$version;
     }
 
     /**
      * Lists buttons
      * @return array Array of buttons.
      */
-
-    static public function buttons() {
+    public function buttons() {
         return array(
             'strong',
             'link',
@@ -200,25 +205,24 @@ class smd_textile_bar {
         );
     }
 
-/**
- * All the required scripts and styles
- */
-
-    static public function head() {
+    /**
+     * All the required scripts and styles.
+     */
+    public function head() {
         global $event, $prefs;
 
-        if($event != 'article')
+        if ($event !== 'article')
             return;
 
         $fields = array('body', 'excerpt');
 
-        foreach($fields as $key => $field) {
-            if(empty($prefs['smd_textile_bar_'.$field])) {
+        foreach ($fields as $key => $field) {
+            if (empty($prefs['smd_textile_bar_'.$field])) {
                 unset($fields[$key]);
             }
         }
 
-        if(!empty($prefs['smd_textile_bar_additional_fields'])) {
+        if (!empty($prefs['smd_textile_bar_additional_fields'])) {
             $fields += do_list($prefs['smd_textile_bar_additional_fields']);
         }
 
@@ -239,8 +243,7 @@ class smd_textile_bar {
 }
 EOCSS;
 
-        foreach($fields as $field) {
-
+        foreach ($fields as $field) {
             $html = <<<EOF
                 <div class="smd_textile_bar">
                     <a class="smd_textile_btn" href="#{$field}" data-callback="heading" data-level="h3">h#.</a>
@@ -280,7 +283,7 @@ EOF;
                 e.preventDefault();
 
                 $.each(this.attributes, function(index, attr) {
-                    if(attr.name.indexOf('data-') === 0) {
+                    if (attr.name.indexOf('data-') === 0) {
                         opt[attr.name.substr(5)] = attr.value;
                     }
                 });
@@ -296,15 +299,15 @@ EOF;
 
                 $.each(opt.field.val().split(/\\r\\n|\\r|\\n/), function(index, line){
 
-                    if(ls > opt.selection.end) {
+                    if (ls > opt.selection.end) {
                         return;
                     }
 
                     le = ls+line.length;
 
-                    if(le >= opt.selection.start) {
+                    if (le >= opt.selection.start) {
 
-                        if(!lines.text[0]) {
+                        if (!lines.text[0]) {
                             lines.start = ls;
                         }
 
@@ -316,13 +319,13 @@ EOF;
 
                     $.each(line.split(' '), function(index, w) {
 
-                        if(i > opt.selection.end) {
+                        if (i > opt.selection.end) {
                             return;
                         }
 
-                        if(i+w.length >= opt.selection.start) {
+                        if (i+w.length >= opt.selection.start) {
 
-                            if(!words.text[0]) {
+                            if (!words.text[0]) {
                                 words.start = i;
                             }
 
@@ -363,13 +366,13 @@ EOF;
                     c.indexOf("\\r\\n", offset) >= 0
                 );
 
-                if(!format[opt.callback]){
+                if (!format[opt.callback]){
                     return;
                 }
 
                 var f = format[opt.callback]();
 
-                if(f) {
+                if (f) {
                     opt.field.val(f);
                 }
 
@@ -394,7 +397,7 @@ EOF;
 
             var start, end, t = this[0];
 
-            if(
+            if (
                 typeof options === "object" &&
                 typeof options.start === "number" &&
                 typeof options.end === "number"
@@ -403,7 +406,7 @@ EOF;
                 end = options.end;
             }
 
-            if(typeof start != "undefined"){
+            if (typeof start != "undefined"){
 
                 this[0].selectionStart = start;
                 this[0].selectionEnd = end;
@@ -434,11 +437,11 @@ EOF;
 
     var insert = function(string, start, end) {
 
-        if(typeof start === "undefined") {
+        if (typeof start === "undefined") {
             start = opt.selection.start;
         }
 
-        if(typeof end === "undefined") {
+        if (typeof end === "undefined") {
             end = opt.selection.end;
         }
 
@@ -458,7 +461,7 @@ EOF;
 
         code : function() {
 
-            if(
+            if (
                 (is.linefirst && is.empty) ||
                 !is.inline
             ) {
@@ -502,7 +505,7 @@ EOF;
 
         inline : function() {
 
-            if(
+            if (
                 is.empty &&
                 words.text.length == 1
             ) {
@@ -527,7 +530,7 @@ EOF;
             var line = lines.text.join("\\n");
             var s = line.substr(0,3);
 
-            if(jQuery.inArray(s, ['h1.', 'h2.', 'h3.', 'h4.', 'h5.', 'h6.']) >= 0) {
+            if (jQuery.inArray(s, ['h1.', 'h2.', 'h3.', 'h4.', 'h5.', 'h6.']) >= 0) {
                 s = s == 'h6.' ? 1 : parseInt(s.substr(1,1)) + 1;
                 insert(s, lines.start+1, lines.start+2);
                 opt.selection.end = lines.start+line.length;
@@ -570,7 +573,7 @@ EOF;
             var text = opt.selection.text;
             var link = 'http://';
 
-            if(
+            if (
                 is.empty &&
                 words.text.length == 1
             ) {
@@ -579,12 +582,12 @@ EOF;
                 text = words.text.join(' ');
             }
 
-            if(text.indexOf('http://') == 0 || text.indexOf('https://') == 0) {
+            if (text.indexOf('http://') == 0 || text.indexOf('https://') == 0) {
                 link = text;
                 text = '$';
             }
 
-            else if(text.indexOf('www.') == 0) {
+            else if (text.indexOf('www.') == 0) {
                 link = 'http://'+text;
                 text = '$';
             }
@@ -601,9 +604,9 @@ EOF;
             var text = opt.selection.text;
             var abc = 'ABC';
 
-            if(is.empty) {
+            if (is.empty) {
 
-                if(
+                if (
                     words.text.length == 1 &&
                     words.text[0].length >= 3 &&
                     /[:lower:]/.test(words.text[0]) === false
@@ -625,11 +628,11 @@ EOF;
 
     $.fn.smd_textile_bar = function(method) {
 
-        if(methods[method]){
+        if (methods[method]){
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
         }
 
-        else if(typeof method === 'object' || !method){
+        else if (typeof method === 'object' || !method){
             return methods.init.apply(this, arguments);
         }
 
@@ -653,8 +656,7 @@ EOF;
     /**
      * Redirects to the preferences panel
      */
-
-    static public function prefs() {
+    public function prefs() {
         header('Location: ?event=prefs#prefs_group_smd_textile_bar');
         echo
             '<p id="message">'.n.
