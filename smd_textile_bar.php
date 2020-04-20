@@ -58,11 +58,11 @@ $plugin['textpack'] = <<<EOT
 #@language en, en-gb, en-us
 #@prefs
 smd_textile_bar => Textile bar
-smd_textile_bar_acronym => Show acronym
-smd_textile_bar_bc => Show Block code (bc)
+smd_textile_bar_acronym => Show abbreviation
+smd_textile_bar_bc => Show block code (bc)
 smd_textile_bar_body => Attach to Body field
-smd_textile_bar_bq => Show Block quote (bq)
-smd_textile_bar_btn_acronym => Acronym
+smd_textile_bar_bq => Show block quote (bq)
+smd_textile_bar_btn_acronym => Abbr
 smd_textile_bar_btn_bc => Block code
 smd_textile_bar_btn_bq => Block quote
 smd_textile_bar_btn_code => Code
@@ -333,7 +333,7 @@ class smd_textile_bar
     display: flex;
     flex-wrap: wrap;
 }
-.smd_textile_bar--buttons {
+.smd_textile_bar--buttons a {
     padding: 0.25em 0.5em;
     margin: 0.15em;
     border: 1px solid #888;
@@ -341,16 +341,26 @@ class smd_textile_bar
     background: #ddd;
     color: #333;
 }
+.smd_textile_bar--text {
+    margin: 0;
+}
+.smd_textile_bar--text a {
+    padding: 0.25em 0.65em;
+    margin: 0.15em;
+    color: #333;
+    font-size:88.125%;
+}
 EOCSS;
 
         $aclass = array();
+        $use_icons = get_pref('smd_textile_bar_icons');
         $aclass[] = (get_pref('smd_textile_bar_buttons')) ? 'smd_textile_bar--buttons' : '';
-        $aclass[] = (get_pref('smd_textile_bar_icons')) ? 'smd_textile_bar--icons' : 'smd_textile_bar--text';
+        $aclass[] = ($use_icons) ? 'smd_textile_bar--icons' : 'smd_textile_bar--text';
         $class_str = implode(' ', $aclass);
 
         foreach ($fields as $field) {
             $html = array();
-            $html[] = '<div class="smd_textile_bar">';
+            $html[] = '<div class="smd_textile_bar '.$class_str.'">';
 
             foreach ($buttons as $key => $opts) {
                 if (!get_pref('smd_textile_bar_'.$key)) {
@@ -363,7 +373,15 @@ EOCSS;
                     $params[] = 'data-'.$data.'="'.$val.'"';
                 }
 
-                $html[] = '<a class="'.$class_str.'" href="#'.$field.'" '.implode(' ', $params).'>'.gTxt('smd_textile_bar_btn_'.$key).'</a>';
+                if ($use_icons) {
+                    $content = '&nbsp;';
+                    $title = ' title="'.gTxt('smd_textile_bar_btn_'.$key).'"';
+                } else {
+                    $content = gTxt('smd_textile_bar_btn_'.$key);
+                    $title = '';
+                }
+
+                $html[] = '<a class="smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
 
             }
 
@@ -640,7 +658,7 @@ EOCSS;
             var s = line.substr(0,3);
 
             if (jQuery.inArray(s, ['h1.', 'h2.', 'h3.', 'h4.', 'h5.', 'h6.']) >= 0) {
-                s = s == 'h6.' ? 1 : parseInt(s.substr(1,1)) + 1;
+                s = opt.level;
                 insert(s, lines.start+1, lines.start+2);
                 opt.selection.end = lines.start+line.length;
                 return;
@@ -753,7 +771,7 @@ EOCSS;
 })(jQuery, 'length', 'createRange', 'duplicate');
 
 $(document).ready(function(){
-    $("a.smd_textile_btn").smd_textile_bar();
+    $("a.smd_textile_bar_btn").smd_textile_bar();
 });
 
 EOF;
