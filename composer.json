@@ -1,0 +1,16 @@
+{
+  "name": "bloke/smd_textile_bar",
+  "description": "Simple Textile insertion bar for the Textpattern Write panel",
+  "keywords": ["textpattern", "plugin", "textile", "markup", "insert", "write", "toolbar"],
+  "homepage": "https://github.com/bloke/smd_textile_bar",
+  "license": "GPL-2.0",
+  "type": "textpattern-plugin",
+  "support": {
+    "issues": "https://github.com/bloke/smd_textile_bar/issues",
+    "source": "https://github.com/bloke/smd_textile_bar"
+  },
+  "require": {
+    "textpattern/lock": ">=4.7.0",
+    "textpattern/installer": "*"
+  }
+}
