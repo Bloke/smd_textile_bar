@@ -332,13 +332,13 @@ class smd_textile_bar
         $js = '';
         $style = <<<EOCSS
 .smd_textile_bar {
-    margin: 0 0 0.2em;
     display: flex;
     flex-wrap: wrap;
+    margin: 0 0 0.2em;
 }
 .smd_textile_bar--buttons a {
-    padding: 0.25em 0.5em;
     margin: 0.15em;
+    padding: 0.25em 0.5em;
     border: 1px solid #888;
     border-radius: 4px;
     background: #ddd;
@@ -346,12 +346,41 @@ class smd_textile_bar
 }
 .smd_textile_bar--text {
     margin: 0;
+    padding: 0.2em;
+    border: 1px solid #ccc;
+    border-bottom-width: 0;
+    background-color: #eee;
+    background-image: linear-gradient(#eee,#ddd);
 }
 .smd_textile_bar--text a {
-    padding: 0.25em 0.65em;
-    margin: 0.15em;
+    margin: 0 0.2em 0 0;
+    padding: 0.5em 0.65em;
     color: #333;
-    font-size:88.125%;
+    font-size: 1em;
+    line-height: 1;
+}
+.smd_textile_bar--text a:hover {
+    background: #ccc;
+    color: #000;
+    border-radius: 0.25em;
+    text-decoration: none;
+}
+.smd_textile_bar--buttons.smd_textile_bar--text {
+    background: none;
+    border: 0;
+    padding: 0 0 .3em 0;
+}
+.smd_textile_bar--buttons.smd_textile_bar--text a {
+    margin: .35em .35em 0 0;
+    border-radius: .35em;
+    background-color: #ddd;
+    background-image: linear-gradient(#eee,#ddd);
+    border-color: #ccc;
+}
+.smd_textile_bar--buttons.smd_textile_bar--text a:hover {
+    background-color: #e8e8e8;
+    background-image: linear-gradient(#f8f8f8,#e8e8e8);
+    border-color: #aaa;
 }
 EOCSS;
 
