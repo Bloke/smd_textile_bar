@@ -130,6 +130,7 @@ class smd_textile_bar
     protected $event = 'smd_textile_bar';
     protected $version = '0.1.0';
     protected $privs = '1,2';
+    protected $all_privs = '1,2,3,4,5,6';
 
     /**
      * Constructor
@@ -139,7 +140,7 @@ class smd_textile_bar
         add_privs('plugin_prefs.'.$this->event, $this->privs);
         add_privs($this->event, $this->privs);
         add_privs('prefs.'.$this->event.'.'.$this->event.'_features', $this->privs);
-        add_privs('prefs.'.$this->event.'.'.$this->event.'_layout', $this->privs);
+        add_privs('prefs.'.$this->event.'.'.$this->event.'_layout', $this->all_privs);
 
         register_callback(array($this, 'prefs'), 'plugin_prefs.'.$this->event);
         register_callback(array($this, 'install'), 'plugin_lifecycle.'.$this->event);
@@ -176,23 +177,16 @@ class smd_textile_bar
         $position = 230;
 
         $values['features'] = array_keys($this->buttons());
-        $values['layout'] = array('excerpt', 'body', 'buttons', 'icons');
+        $values['layout'] = array('body', 'excerpt', 'buttons', 'icons');
 
         foreach ($values as $group => $set) {
+            $scope = ($group === 'layout') ? PREF_PRIVATE : PREF_GLOBAL;
+
             foreach ($set as $n) {
                 $name = 'smd_textile_bar_'.$n;
 
                 if (!isset($prefs[$name])) {
-                    safe_insert(
-                        'txp_prefs',
-                        "name='".doSlash($name)."',
-                        val='1',
-                        type=1,
-                        event='smd_textile_bar.smd_textile_bar_".$group."',
-                        html='yesnoradio',
-                        position=".$position
-                    );
-
+                    set_pref($name, 1, 'smd_textile_bar.smd_textile_bar_'.$group, PREF_PLUGIN, 'yesnoradio', $position, $scope);
                     $prefs[$name] = 1;
                 }
 
