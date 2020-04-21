@@ -386,7 +386,7 @@ EOCSS;
 
         foreach ($fields as $field) {
             $html = array();
-            $html[] = '<div class="smd_textile_bar '.$class_str.'">';
+            $html[] = '<div class="smd_textile_bar '.$field.' '.$class_str.'">';
 
             foreach ($buttons as $key => $opts) {
                 if (!get_pref('smd_textile_bar_'.$key)) {
@@ -796,8 +796,26 @@ EOCSS;
 
 })(jQuery, 'length', 'createRange', 'duplicate');
 
+/**
+ * Hide the bar if user is not using Textile.
+ */
+function smd_textile_bar_toggle(ev) {
+    var tf_name = ev.target.name;
+    var tf_value = ev.target.value;
+    var selpart = (tf_name === 'textile_body') ? 'body' : 'excerpt';
+    var sel = $('.smd_textile_bar.'+selpart);
+
+    if (tf_value == '1') {
+        sel.show();
+    } else {
+        sel.hide();
+    }
+}
+
 $(document).ready(function(){
     $("a.smd_textile_bar_btn").smd_textile_bar();
+    $('.txp-textfilter-options .textfilter-value').on('change', smd_textile_bar_toggle).change();
+
 });
 
 EOF;
