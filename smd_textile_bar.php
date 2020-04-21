@@ -88,6 +88,7 @@ smd_textile_bar_code => Show inline code
 smd_textile_bar_del => Show delete
 smd_textile_bar_emphasis => Show emphasis (italic)
 smd_textile_bar_excerpt => Attach to Excerpt field
+smd_textile_bar_features => Bar features
 smd_textile_bar_h1 => Show h1
 smd_textile_bar_h2 => Show h2
 smd_textile_bar_h3 => Show h3
@@ -97,6 +98,7 @@ smd_textile_bar_h6 => Show h6
 smd_textile_bar_icons => Use icons
 smd_textile_bar_image => Show image
 smd_textile_bar_ins => Show insert
+smd_textile_bar_layout => Bar layout
 smd_textile_bar_link => Show link
 smd_textile_bar_strong => Show strong (bold)
 smd_textile_bar_ol => Show ordered list (ol)
@@ -125,6 +127,7 @@ if (txpinterface === 'admin') {
 
 class smd_textile_bar
 {
+    protected $event = 'smd_textile_bar';
     protected $version = '0.1.0';
     protected $privs = '1,2';
 
@@ -133,12 +136,13 @@ class smd_textile_bar
      */
     public function __construct()
     {
-        add_privs('plugin_prefs.smd_textile_bar', $this->privs);
-        add_privs('smd_textile_bar', $this->privs);
-        add_privs('prefs.smd_textile_bar', $this->privs);
+        add_privs('plugin_prefs.'.$this->event, $this->privs);
+        add_privs($this->event, $this->privs);
+        add_privs('prefs.'.$this->event.'.'.$this->event.'_features', $this->privs);
+        add_privs('prefs.'.$this->event.'.'.$this->event.'_layout', $this->privs);
 
-        register_callback(array($this, 'prefs'), 'plugin_prefs.smd_textile_bar');
-        register_callback(array($this, 'install'), 'plugin_lifecycle.smd_textile_bar');
+        register_callback(array($this, 'prefs'), 'plugin_prefs.'.$this->event);
+        register_callback(array($this, 'install'), 'plugin_lifecycle.'.$this->event);
         register_callback(array($this, 'head'), 'admin_side', 'head_end');
 
         $this->install();
@@ -171,30 +175,29 @@ class smd_textile_bar
 
         $position = 230;
 
-        $values = array_keys($this->buttons());
-        $values[] = 'excerpt';
-        $values[] = 'body';
-        $values[] = 'buttons';
-        $values[] = 'icons';
+        $values['features'] = array_keys($this->buttons());
+        $values['layout'] = array('excerpt', 'body', 'buttons', 'icons');
 
-        foreach ($values as $n) {
-            $name = 'smd_textile_bar_'.$n;
+        foreach ($values as $group => $set) {
+            foreach ($set as $n) {
+                $name = 'smd_textile_bar_'.$n;
 
-            if (!isset($prefs[$name])) {
-                safe_insert(
-                    'txp_prefs',
-                    "name='".doSlash($name)."',
-                    val='1',
-                    type=1,
-                    event='smd_textile_bar',
-                    html='yesnoradio',
-                    position=".$position
-                );
+                if (!isset($prefs[$name])) {
+                    safe_insert(
+                        'txp_prefs',
+                        "name='".doSlash($name)."',
+                        val='1',
+                        type=1,
+                        event='smd_textile_bar.smd_textile_bar_".$group."',
+                        html='yesnoradio',
+                        position=".$position
+                    );
 
-                $prefs[$name] = 1;
+                    $prefs[$name] = 1;
+                }
+
+                $position++;
             }
-
-            $position++;
         }
 
         safe_delete(
@@ -202,7 +205,7 @@ class smd_textile_bar
             "name LIKE 'rah\_textile\_bar\_h_' OR name='smd_textile_bar_codeline'"
         );
 
-        set_pref('smd_textile_bar_version', $this->version,'smd_textile_bar', 2, '', 0);
+        set_pref('smd_textile_bar_version', $this->version, $this->event, 2, '', 0);
         $prefs['smd_textile_bar_version'] = $this->version;
     }
 
