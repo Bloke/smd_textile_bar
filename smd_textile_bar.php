@@ -547,7 +547,6 @@ EOCSS;
          */
 
         caret : function(options) {
-
             var start, end, t = this[0];
 
             if (
@@ -559,7 +558,7 @@ EOCSS;
                 end = options.end;
             }
 
-            if (typeof start != "undefined"){
+            if (typeof start != "undefined") {
 
                 this[0].selectionStart = start;
                 this[0].selectionEnd = end;
@@ -589,7 +588,6 @@ EOCSS;
      */
 
     var insert = function(string, start, end) {
-
         if (typeof start === "undefined") {
             start = opt.selection.start;
         }
@@ -613,7 +611,6 @@ EOCSS;
          */
 
         code : function() {
-
             if (
                 (is.linefirst && is.empty) ||
                 !is.inline
@@ -634,7 +631,6 @@ EOCSS;
          */
 
         list : function() {
-
             var out = [];
 
             $.each(lines.text, function(key, line){
@@ -657,7 +653,6 @@ EOCSS;
          */
 
         inline : function() {
-
             if (
                 is.empty &&
                 words.text.length == 1
@@ -679,7 +674,6 @@ EOCSS;
          */
 
         heading : function() {
-
             var line = lines.text.join("\\n");
             var s = line.substr(0,3);
 
@@ -711,7 +705,7 @@ EOCSS;
         },
 
         /**
-         * Formats a image
+         * Formats an image
          */
 
         image : function() {
@@ -722,7 +716,6 @@ EOCSS;
          */
 
         link : function() {
-
             var text = opt.selection.text;
             var link = 'http://';
 
@@ -753,22 +746,16 @@ EOCSS;
          */
 
         acronym : function() {
-
             var text = opt.selection.text;
             var abc = 'ABC';
 
-            if (is.empty) {
-
-                if (
-                    words.text.length == 1 &&
-                    words.text[0].length >= 3 &&
-                    /[:lower:]/.test(words.text[0]) === false
-                ) {
-                    abc = words.text[0];
-                }
-
-                else {
-                    text = words.text.join(' ');
+            if (!is.empty) {
+                if (words.text.length >= 3) {
+                    matches = text.match(/\b(\w)/g);
+                    abc = matches.join('').toUpperCase();
+                } else if (/[:lower:]/.test(words.text[0]) === false) {
+                    abc = text;
+                    text = '';
                 }
 
                 opt.selection.start = words.start;
@@ -780,7 +767,6 @@ EOCSS;
     };
 
     $.fn.smd_textile_bar = function(method) {
-
         if (methods[method]){
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
         }
