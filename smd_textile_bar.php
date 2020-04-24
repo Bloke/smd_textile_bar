@@ -68,6 +68,7 @@ smd_textile_bar_btn_bq => Block quote
 smd_textile_bar_btn_code => Code
 smd_textile_bar_btn_del => Delete
 smd_textile_bar_btn_emphasis => Italics
+smd_textile_bar_btn_form => Form
 smd_textile_bar_btn_h1 => H1
 smd_textile_bar_btn_h2 => H2
 smd_textile_bar_btn_h3 => H3
@@ -89,6 +90,7 @@ smd_textile_bar_del => Show delete
 smd_textile_bar_emphasis => Show emphasis (italic)
 smd_textile_bar_excerpt => Attach to Excerpt field
 smd_textile_bar_features => Bar features
+smd_textile_bar_form => Allow Form insertion from this group
 smd_textile_bar_h1 => Show h1
 smd_textile_bar_h2 => Show h2
 smd_textile_bar_h3 => Show h3
@@ -152,14 +154,14 @@ class smd_textile_bar
     /**
      * Installer
      *
-     * @param string $event Admin-side event.
-     * @param string $step  Admin-side event, plugin-lifecycle step.
+     * @param string $evt Admin-side event.
+     * @param string $stp  Admin-side event, plugin-lifecycle step.
      */
-    public function install($event = '', $step = '')
+    public function install($evt = '', $stp = '')
     {
         global $prefs;
 
-        if ($step == 'deleted') {
+        if ($stp == 'deleted') {
             safe_delete(
                 'txp_prefs',
                 "name like 'rah\_textile\_bar\_%' OR name like 'smd\_textile\_bar\_%'"
@@ -183,10 +185,18 @@ class smd_textile_bar
             $scope = ($group === 'layout') ? PREF_PRIVATE : PREF_GLOBAL;
 
             foreach ($set as $n) {
+                if ($n === 'form') {
+                    $html = $this->event.'->getFormTypes';
+                    $val = '';
+                } else {
+                    $html = 'yesnoradio';
+                    $val = 1;
+                }
+
                 $name = 'smd_textile_bar_'.$n;
 
                 if (!isset($prefs[$name])) {
-                    set_pref($name, 1, 'smd_textile_bar.smd_textile_bar_'.$group, PREF_PLUGIN, 'yesnoradio', $position, $scope);
+                    set_pref($name, $val, 'smd_textile_bar.smd_textile_bar_'.$group, PREF_PLUGIN, $html, $position, $scope);
                     $prefs[$name] = 1;
                 }
 
@@ -297,7 +307,41 @@ class smd_textile_bar
             'acronym' => array(
                 'callback' => 'acronym',
                 ),
+            'form' => array(
+                'callback' => 'form',
+                'before'   => '<txp::',
+                'after'    => ' />',
+            ),
         );
+    }
+
+    /**
+     * Fetch form types as a select list
+     *
+     * @return string HTML
+     */
+    public function getFormTypes($key, $val)
+    {
+        $instance = Txp::get('Textpattern\Skin\Form');
+
+        $form_types = array();
+
+        foreach ($instance->getTypes() as $type) {
+            $form_types[$type] = gTxt($type);
+        }
+
+        return selectInput('smd_textile_bar_form', $form_types, $val, true);
+    }
+
+    /**
+     * Fetch forms of the given type
+     *
+     * @param string $type The form type (group)
+     * @return array Form names
+     */
+    protected function getFormsOfType($type)
+    {
+        return safe_column('name', 'txp_form', "type='".doSlash($type)."'");
     }
 
     /**
@@ -396,7 +440,7 @@ EOCSS;
                 $params = array();
 
                 foreach ($opts as $data => $val) {
-                    $params[] = 'data-'.$data.'="'.$val.'"';
+                    $params[] = 'data-'.$data.'="'.htmlentities($val).'"';
                 }
 
                 if ($use_icons) {
@@ -419,11 +463,13 @@ EOCSS;
                 '});';
         }
 
+        $formlist = json_encode(array_keys($this->getFormsOfType(get_pref('smd_textile_bar_form'))));
+
         $js .= <<<EOF
 
 (function($, len, createRange, duplicate){
 
-    var opt = {}, is = {}, form = {}, words = {}, lines = {};
+    var opt = {}, is = {}, form = {$formlist}, words = {}, lines = {};
 
     var methods = {
 
@@ -450,7 +496,7 @@ EOCSS;
 
                 var i = 0, ls = 0, le = 0;
 
-                $.each(opt.field.val().split(/\\r\\n|\\r|\\n/), function(index, line){
+                $.each(opt.field.val().split(/\\r\\n|\\r|\\n/), function(index, line) {
 
                     if (ls > opt.selection.end) {
                         return;
@@ -519,7 +565,7 @@ EOCSS;
                     c.indexOf("\\r\\n", offset) >= 0
                 );
 
-                if (!format[opt.callback]){
+                if (!format[opt.callback]) {
                     return;
                 }
 
@@ -536,7 +582,7 @@ EOCSS;
             });
         },
 
-        /*!
+        /**
          * Caret code based on jCaret
          * @author C. F., Wong (Cloudgen)
          * @link http://code.google.com/p/jcaret/
@@ -559,15 +605,11 @@ EOCSS;
             }
 
             if (typeof start != "undefined") {
-
                 this[0].selectionStart = start;
                 this[0].selectionEnd = end;
                 this[0].focus();
                 return this;
-            }
-
-            else {
-
+            } else {
                 var s = t.selectionStart,
                 e = t.selectionEnd;
 
@@ -692,6 +734,40 @@ EOCSS;
         },
 
         /**
+         * Inserts form
+         */
+
+        form : function() {
+            var line = lines.text.join("\\n");
+            const regex = /^<txp::([A-Za-z0-9_.\-]+)/gu;
+            var parts = regex.exec(line);
+
+            if (parts !== null) {
+                var capture = parts[1];
+
+                if ((pos = form.indexOf(capture)) > -1) {
+                    pos = (pos === (form.length)-1) ? 0 : pos+1;
+                    insert(opt.before + form[pos], lines.start, lines.start+parts[0].length);
+                    opt.selection.end = lines.start+parts[0].length;
+                    return;
+                } else {
+                    var toAdd = opt.before + form[0] + opt.after;
+                    insert(
+                        (!is.paragraph ? "\\n\\n" : '') + toAdd,
+                        lines.end + 2, lines.end + 2 + toAdd.length
+                    );
+                    return;
+                }
+            }
+
+            insert(
+                opt.before + form[0] + opt.after + line,
+                lines.start,
+                lines.end
+            );
+        },
+
+        /**
          * Formats normal blocks
          */
 
@@ -717,7 +793,7 @@ EOCSS;
 
         link : function() {
             var text = opt.selection.text;
-            var link = 'http://';
+            var link = 'https://';
 
             if (
                 is.empty &&
@@ -731,10 +807,8 @@ EOCSS;
             if (text.indexOf('http://') == 0 || text.indexOf('https://') == 0) {
                 link = text;
                 text = '$';
-            }
-
-            else if (text.indexOf('www.') == 0) {
-                link = 'http://'+text;
+            } else if (text.indexOf('www.') == 0) {
+                link = 'https://'+text;
                 text = '$';
             }
 
@@ -767,15 +841,11 @@ EOCSS;
     };
 
     $.fn.smd_textile_bar = function(method) {
-        if (methods[method]){
+        if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-        }
-
-        else if (typeof method === 'object' || !method){
+        } else if (typeof method === 'object' || !method){
             return methods.init.apply(this, arguments);
-        }
-
-        else {
+        } else {
             $.error('[smd_textile_bar: unknown method '+method+']');
         }
     };
