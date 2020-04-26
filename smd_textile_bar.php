@@ -85,7 +85,7 @@ smd_textile_bar_btn_strong => Bold
 smd_textile_bar_btn_sub => Subscript
 smd_textile_bar_btn_sup => Superscript
 smd_textile_bar_btn_ul => List
-smd_textile_bar_buttons => Use buttons
+smd_textile_bar_buttons => Use buttons (text) / Show tooltips (icons)
 smd_textile_bar_code => Show inline code
 smd_textile_bar_del => Show delete
 smd_textile_bar_emphasis => Show emphasis (italic)
@@ -202,12 +202,6 @@ $plugin['data'] = <<<ENDICONS
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.8 15.3h9.2"></path>
 </symbol>
 <symbol id="smd-icon-acronym" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M1.5 15.6l0.8-1.6M8 15.6l-0.8-1.6M7.3 13.9l-2.5-5.4-2.5 5.5M7.3 13.9h-5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.6 11.9h2.3c0.7 0 2.1 0 2.1-1.8s-1.4-1.8-2.1-1.8h-2.3z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.6 11.9h2.7c0.7 0 2.1 0 2.1 1.8s-1.4 1.8-2.1 1.8h-2.7z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.5 8.7c-0.4-0.2-0.8-0.2-1.3-0.2-1.9 0-3.5 1.6-3.5 3.5s1.6 3.5 3.5 3.5c0.5 0 0.9-0.1 1.3-0.2"></path>
-</symbol>
-<symbol id="smd-icon-abbr" viewBox="0 0 24 24">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.5 15.5h-3.3"></path>
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.5 8.5h-3.3"></path>
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M20.8 15.5v-7"></path>
