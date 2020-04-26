@@ -1,5 +1,9 @@
 h1. Changelog
 
+h2. 0.1.1 - 2020-26-04
+
+* Fix lost superscript button when using combined headings (thanks, jools-r).
+
 h2. 0.1.0 - 2020-26-04
 
 * Initial release for Txp 4.7+.

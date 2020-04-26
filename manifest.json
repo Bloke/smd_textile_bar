@@ -1,7 +1,7 @@
 {
   "name": "smd_textile_bar",
   "description": "Simple Textile insertion bar for the Textpattern Write panel",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": 4,
   "author": "Stef Dawson",
   "author_uri": "https://stefdawson.com/",

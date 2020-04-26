@@ -17,7 +17,7 @@ $plugin['name'] = 'smd_textile_bar';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '0.1.0';
+$plugin['version'] = '0.1.1';
 $plugin['author'] = 'Stef Dawson / Julian Reisenberger / Jukka Svahn / Patrick Woods';
 $plugin['author_uri'] = 'https://stefdawson.com/';
 $plugin['description'] = 'Textile bar for the Write panel in Textpattern CMS';
@@ -569,29 +569,18 @@ class smd_textile_bar
                     continue;
                 }
 
-                $params = array();
-
                 // Combine headings into a single button if necessary.
                 if (!$separate_headings && !$headings_done && $used_headings) {
-                    $key = 'hx';
-                    $opts = array('callback' => 'heading', 'level' => filter_var($used_headings[0], FILTER_SANITIZE_NUMBER_INT));
+                    $head_opts = array(
+                        'callback' => 'heading',
+                        'level' => filter_var($used_headings[0], FILTER_SANITIZE_NUMBER_INT)
+                    );
+
+                    $html[] = $this->getButton($field, 'hx', $head_opts, compact('use_icons'));
                     $headings_done = true;
                 }
 
-                foreach ($opts as $data => $val) {
-                    $params[] = 'data-'.$data.'="'.htmlentities($val).'"';
-                }
-
-                if ($use_icons) {
-                    $content = '<svg class="smd-icon-'.$key.'"><use xlink:href="#smd-icon-'.$key.'"></use></svg>';
-                    $title = ' title="'.gTxt('smd_textile_bar_btn_'.$key).'"';
-                } else {
-                    $content = gTxt('smd_textile_bar_btn_'.$key);
-                    $title = '';
-                }
-
-                $html[] = '<a class="smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
-
+                $html[] = $this->getButton($field, $key, $opts, compact('use_icons'));
             }
 
             $html[] = '</div>';
@@ -610,6 +599,34 @@ class smd_textile_bar
         echo '<style>' . $style . '</style>';
         echo script_js($js);
         echo $icons;
+    }
+
+    /**
+     * Return an fully formed button for the toolbar.
+     *
+     * @param  string $field  Where the button should appear (body / excerpt)
+     * @param  string $key    Button designator
+     * @param  array  $opts   Button options
+     * @param  array  $extras Additional display info
+     * @return string         HTML
+     */
+    protected function getButton($field, $key, $opts, $extras)
+    {
+        $params = array();
+
+        foreach ($opts as $data => $val) {
+            $params[] = 'data-'.$data.'="'.htmlentities($val).'"';
+        }
+
+        if ($extras['use_icons']) {
+            $content = '<svg class="smd-icon-'.$key.'"><use xlink:href="#smd-icon-'.$key.'"></use></svg>';
+            $title = ' title="'.gTxt('smd_textile_bar_btn_'.$key).'"';
+        } else {
+            $content = gTxt('smd_textile_bar_btn_'.$key);
+            $title = '';
+        }
+
+        return '<a class="smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
     }
 
     /**
