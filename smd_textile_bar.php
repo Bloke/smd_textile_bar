@@ -75,6 +75,7 @@ smd_textile_bar_btn_h3 => H3
 smd_textile_bar_btn_h4 => H4
 smd_textile_bar_btn_h5 => H5
 smd_textile_bar_btn_h6 => H6
+smd_textile_bar_btn_hx => Hx
 smd_textile_bar_btn_image => Image
 smd_textile_bar_btn_ins => Insert
 smd_textile_bar_btn_link => Link
@@ -97,6 +98,7 @@ smd_textile_bar_h3 => Show h3
 smd_textile_bar_h4 => Show h4
 smd_textile_bar_h5 => Show h5
 smd_textile_bar_h6 => Show h6
+smd_textile_bar_headings => Use individual headings
 smd_textile_bar_icons => Use icons
 smd_textile_bar_image => Show image
 smd_textile_bar_ins => Show insert
@@ -358,7 +360,7 @@ class smd_textile_bar
         $position = 230;
 
         $values['features'] = array_keys($this->buttons());
-        $values['layout'] = array('body', 'excerpt', 'buttons', 'icons');
+        $values['layout'] = array('body', 'excerpt', 'buttons', 'icons', 'headings');
 
         foreach ($values as $group => $set) {
             $scope = ($group === 'layout') ? PREF_PRIVATE : PREF_GLOBAL;
@@ -548,8 +550,9 @@ class smd_textile_bar
             $fields += do_list($prefs['smd_textile_bar_additional_fields']);
         }
 
-        $js = '';
+        $separate_headings = get_pref('smd_textile_bar_headings');
 
+        $js = '';
         $aclass = array();
         $use_icons = get_pref('smd_textile_bar_icons');
         $aclass[] = (get_pref('smd_textile_bar_buttons')) ? 'smd_textile_bar--buttons' : '';
@@ -559,20 +562,34 @@ class smd_textile_bar
         foreach ($fields as $field) {
             $html = array();
             $html[] = '<div class="smd_textile_bar '.$field.' '.$class_str.'">';
+            $used_headings = array();
+            $headings_done = false;
 
             foreach ($buttons as $key => $opts) {
                 if (!get_pref('smd_textile_bar_'.$key)) {
                     continue;
                 }
 
+                if (!$separate_headings && in_array($key, array('h1', 'h2', 'h3', 'h4', 'h5', 'h6'))) {
+                    $used_headings[] = $key;
+                    continue;
+                }
+
                 $params = array();
+
+                // Combine headings into a single button if necessary.
+                if (!$separate_headings && !$headings_done && $used_headings) {
+                    $key = 'hx';
+                    $opts = array('callback' => 'heading', 'level' => filter_var($used_headings[0], FILTER_SANITIZE_NUMBER_INT));
+                    $headings_done = true;
+                }
 
                 foreach ($opts as $data => $val) {
                     $params[] = 'data-'.$data.'="'.htmlentities($val).'"';
                 }
 
                 if ($use_icons) {
-                    $content = '&nbsp;';
+                    $content = '<svg class="smd-icon-'.$key.'"><use xlink:href="#smd-icon-'.$key.'"></use></svg>';
                     $title = ' title="'.gTxt('smd_textile_bar_btn_'.$key).'"';
                 } else {
                     $content = gTxt('smd_textile_bar_btn_'.$key);
@@ -594,7 +611,7 @@ class smd_textile_bar
         // Drop the CSS, JavaScript and SVG icons on the page.
         $style = $this->getStyles();
         $icons = \Txp::get('\Textpattern\Plugin\Plugin')->fetchData($this->event);
-        $js .= $this->getJS();
+        $js .= $this->getJS($used_headings);
 
         echo '<style>' . $style . '</style>';
         echo script_js($js);
@@ -634,7 +651,8 @@ class smd_textile_bar
     background: #ddd;
     color: #333;
 }
-.smd_textile_bar--text {
+.smd_textile_bar--text,
+.smd_textile_bar--icons {
     margin: 0;
     padding: 0.2em;
     border: 1px solid #ccc;
@@ -642,18 +660,29 @@ class smd_textile_bar
     background-color: #eee;
     background-image: linear-gradient(#eee,#ddd);
 }
-.smd_textile_bar--text a {
+.smd_textile_bar--text a,
+.smd_textile_bar--icons a {
     margin: 0 0.2em 0 0;
     padding: 0.5em 0.65em;
     color: #333;
     font-size: 1em;
     line-height: 1;
 }
-.smd_textile_bar--text a:hover {
-    background: #ccc;
+.smd_textile_bar--text a:hover,
+.smd_textile_bar--icons a:hover {
+    background-color: #ccc;
     color: #000;
     border-radius: 0.25em;
     text-decoration: none;
+}
+.smd_textile_bar--icons a {
+    border-width: 0;
+    background: none;
+    padding: 0.35em 0.5em .25em;
+}
+.smd_textile_bar--icons a:hover {
+    background-color: #c8c8c8;
+    background-image: linear-gradient(#d8d8d8,#c8c8c8);
 }
 .smd_textile_bar--buttons.smd_textile_bar--text {
     background: none;
@@ -672,6 +701,72 @@ class smd_textile_bar
     background-image: linear-gradient(#f8f8f8,#e8e8e8);
     border-color: #aaa;
 }
+.smd_textile_bar--buttons.smd_textile_bar--icons a {
+    border-width: 0;
+}
+.smd_textile_bar--icons [class^="smd-icon-"],
+.smd_textile_bar--icons [class*=" smd-icon-"] {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: none;
+}
+
+/* Tooltip styles */
+.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn {
+  position: relative;
+}
+.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::before,
+.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::after {
+  text-transform: none;
+  font-size: .9em;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+  left: 50%;
+  transform: translate(-50%, -.25em);
+}
+.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::before {
+  content: '';
+  border: 5px solid transparent;
+  z-index: 1001;
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::after {
+  content: attr(title);
+  text-align: center;
+  min-width: 3em;
+  max-width: 21em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1ch 1.5ch;
+  border-radius: .5ch;
+  box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+  background: #333;
+  color: #fff;
+  z-index: 1000;
+  bottom: calc(100% + 5px);
+}
+
+.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn:hover::before,
+.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn:hover::after {
+  display: block;
+  opacity: 1;
+}
+
+/* don't show empty tooltips */
+.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn[title='']::before,
+.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn[title='']::after {
+  display: none !important;
+}
 EOCSS;
 
         return $styles;
@@ -680,11 +775,13 @@ EOCSS;
     /**
      * Return the JavaScript used in the plugin.
      *
+     * @param array $headings Set of heading tags in use
      * @return string CSS
      */
-    protected function getJS()
+    protected function getJS($headings)
     {
         $formlist = json_encode(array_keys($this->getFormsOfType(get_pref('smd_textile_bar_form'))));
+        $head_levels = json_encode($headings);
 
         $js = <<<EOJS
 (function($, len, createRange, duplicate){
@@ -938,9 +1035,16 @@ EOCSS;
         heading : function() {
             var line = lines.text.join("\\n");
             var s = line.substr(0,3);
+            var head_levels = {$head_levels};
 
             if (jQuery.inArray(s, ['h1.', 'h2.', 'h3.', 'h4.', 'h5.', 'h6.']) >= 0) {
-                s = opt.level;
+                if (head_levels.length > 0 && (pos = jQuery.inArray(s.substr(0,2), head_levels)) > -1) {
+                    var pos = (pos === head_levels.length - 1) ? 0 : pos + 1;
+                    s = parseInt(head_levels[pos].substr(1,1));
+                } else {
+                    s = opt.level;
+                }
+
                 insert(s, lines.start+1, lines.start+2);
                 opt.selection.end = lines.start+line.length;
                 return;
