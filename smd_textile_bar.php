@@ -1257,6 +1257,10 @@ All users may customise how the bar looks. The following options are available:
 * *Use icons* displays icons instead of text labels on the toolbar.
 * *Use individual headings* will show discrete buttons for each permitted heading level. e.g. H2, H3, H4 buttons. If you set this to No then headings can be inserted via a single Hx button. Each click of the button will cycle through the permitted heading levels set by the administrator.
 
+h2. Known issues
+
+* Under Txp 4.7.x, the bar doesn't disappear when the textfilter options are toggled.
+
 # --- END PLUGIN HELP ---
 -->
 <?php
