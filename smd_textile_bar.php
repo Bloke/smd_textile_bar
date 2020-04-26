@@ -1204,28 +1204,41 @@ if (0) {
 # --- BEGIN PLUGIN HELP ---
 h1. smd_textile_bar
 
-p. Brings a simple and minimal Quicktags Textile inserting bar to the backend. No, it's not an heavy and buggy WYSIWYG editor that screws your own XHTML input, but instead it's just a simple bar that insert Textile where you want. The Javascript code is forked from "hak_textile_tags by great hakjoon.":http://forum.textpattern.com/viewtopic.php?id=7470
+p. Brings a simple and minimal Quicktags Textile inserting bar to the backend. It's not a heavy and buggy WYSIWYG editor that screws your own HTML, but instead it's a simple bar that inserts Textile where you want. The plugin is forked from "rah_textile_bar by Gocom":https://forum.textpattern.com/viewtopic.php?id=28283.
 
 h2. List of features
 
-* A simple Textile inserting bar, offering the most common formatting options Textile has.
+* A simple Textile insertion bar, offering the most common formatting options Textile has.
 * Easy to use and install: just run the automated plugin installation and activate.
-* Options can be configured via easy graphical user interface, located at Textpattern's Preferences panel (Textpattern / Admin / Preferences / Textile Bar).
+* Options can be configured via Textpattern's Preferences panel (Admin > Preferences > Textile Bar).
 
 h2. Requirements
 
-p. Minimum requirements:
-
-* Textpattern 4.2.0 or newer.
-* A web browser that is "jQuery":http://jquery.com/ compatible
-
-p. Recommended:
-
-* Textpattern 4.4.1+
+* Textpattern 4.7.3+
 
 h2. Installation and usage
 
-p. Download and copy the plugin code to the plugin installer textarea and run the automatic setup. After activating the plugin, you will see the textilebar above Body-textarea in the Write-tab.
+p. Download and copy the plugin code to the plugin installer textarea. Install and verify to begin the automatic setup. After activating the plugin, you will see the textile bar above Body and Excerpt textareas in the Write panel.
+
+h2. Configuration
+
+Visit the Preferences panel form Textpattern's back-end: Admin > Preferences > Textile Bar.
+
+h3. Admin preferences
+
+Users with Managing Editor or higher privileges can set which buttons are available on the toolbar. Set the radio buttons to Yes for whichever features you wish to display on the toolbar.
+
+The _Allow Form insertion from this group_ option is special. Select a form type from the list and save the preferences to permit insertion of any form contained within the given group. This is very handy for custom shortcodes, as you can create a dedicated form group to house them and offer users the ability to insert them from the toolbar. Each click of the Form button on the toolbar cycles through the available forms. Leave this preference blank to prevent form insertion.
+
+h3. Layout preferences
+
+All users may customise how the bar looks. The following options are available:
+
+* *Attach to Body field* makes the bar available above the Body textarea, when Use Textile is on.
+* *Attach to Excerpt field* makes the bar available above the Excerpt textarea, when Use Textile is on.
+* *Use buttons (text) / Show tooltips (icons)* will present the bar as a series of buttons instead of a single strip. If you elect to display icons instead of text (see next option), this setting governs whether tooltips are displayed.
+* *Use icons* displays icons instead of text labels on the toolbar.
+* *Use individual headings* will show discrete buttons for each permitted heading level. e.g. H2, H3, H4 buttons. If you set this to No then headings can be inserted via a single Hx button. Each click of the button will cycle through the permitted heading levels set by the administrator.
 
 # --- END PLUGIN HELP ---
 -->
