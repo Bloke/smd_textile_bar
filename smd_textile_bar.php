@@ -402,6 +402,26 @@ class smd_textile_bar
     public function buttons()
     {
         return array(
+            'strong' => array(
+                'callback' => 'inline',
+                'before'   => '*',
+                'after'    => '*',
+                ),
+            'emphasis' => array(
+                'callback' => 'inline',
+                'before'   => '_',
+                'after'    => '_',
+                ),
+            'ins' => array(
+                'callback' => 'inline',
+                'before'   => '+',
+                'after'    => '+',
+                ),
+            'del' => array(
+                'callback' => 'inline',
+                'before'   => '-',
+                'after'    => '-',
+                ),
             'h1' => array(
                 'callback' => 'heading',
                 'level'    => '1',
@@ -426,6 +446,16 @@ class smd_textile_bar
                 'callback' => 'heading',
                 'level'    => '6',
                 ),
+            'sup' => array(
+                'callback' => 'inline',
+                'before'   => '^',
+                'after'    => '^',
+                ),
+            'sub' => array(
+                'callback' => 'inline',
+                'before'   => '~',
+                'after'    => '~',
+                ),
             'link' => array(
                 'callback' => 'link',
                 ),
@@ -436,36 +466,6 @@ class smd_textile_bar
             'ol' => array(
                 'callback' => 'list',
                 'bullet'   => '#',
-                ),
-            'strong' => array(
-                'callback' => 'inline',
-                'before'   => '*',
-                'after'    => '*',
-                ),
-            'emphasis' => array(
-                'callback' => 'inline',
-                'before'   => '_',
-                'after'    => '_',
-                ),
-            'ins' => array(
-                'callback' => 'inline',
-                'before'   => '+',
-                'after'    => '+',
-                ),
-            'del' => array(
-                'callback' => 'inline',
-                'before'   => '-',
-                'after'    => '-',
-                ),
-            'sup' => array(
-                'callback' => 'inline',
-                'before'   => '^',
-                'after'    => '^',
-                ),
-            'sub' => array(
-                'callback' => 'inline',
-                'before'   => '~',
-                'after'    => '~',
                 ),
             'image' => array(
                 'callback' => 'inline',
@@ -549,8 +549,78 @@ class smd_textile_bar
         }
 
         $js = '';
+
+        $aclass = array();
+        $use_icons = get_pref('smd_textile_bar_icons');
+        $aclass[] = (get_pref('smd_textile_bar_buttons')) ? 'smd_textile_bar--buttons' : '';
+        $aclass[] = ($use_icons) ? 'smd_textile_bar--icons' : 'smd_textile_bar--text';
+        $class_str = implode(' ', $aclass);
+
+        foreach ($fields as $field) {
+            $html = array();
+            $html[] = '<div class="smd_textile_bar '.$field.' '.$class_str.'">';
+
+            foreach ($buttons as $key => $opts) {
+                if (!get_pref('smd_textile_bar_'.$key)) {
+                    continue;
+                }
+
+                $params = array();
+
+                foreach ($opts as $data => $val) {
+                    $params[] = 'data-'.$data.'="'.htmlentities($val).'"';
+                }
+
+                if ($use_icons) {
+                    $content = '&nbsp;';
+                    $title = ' title="'.gTxt('smd_textile_bar_btn_'.$key).'"';
+                } else {
+                    $content = gTxt('smd_textile_bar_btn_'.$key);
+                    $title = '';
+                }
+
+                $html[] = '<a class="smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
+
+            }
+
+            $html[] = '</div>';
+            $html_str = implode(n, $html);
+            $js .=
+                '$(document).ready(function(){'.
+                    '$("textarea#'.escape_js($field).'").before("'.escape_js($html_str).'")'.
+                '});';
+        }
+
+        // Drop the CSS, JavaScript and SVG icons on the page.
+        $style = $this->getStyles();
         $icons = \Txp::get('\Textpattern\Plugin\Plugin')->fetchData($this->event);
-        $style = <<<EOCSS
+        $js .= $this->getJS();
+
+        echo '<style>' . $style . '</style>';
+        echo script_js($js);
+        echo $icons;
+    }
+
+    /**
+     * Redirects to the preferences panel
+     */
+    public function prefs()
+    {
+        header('Location: ?event=prefs#prefs_group_smd_textile_bar');
+        echo
+            '<p id="message">'.n.
+            '   <a href="?event=prefs#prefs_group_smd_textile_bar">'.gTxt('continue').'</a>'.n.
+            '</p>';
+    }
+
+    /**
+     * Return the CSS used in the plugin.
+     *
+     * @return string CSS
+     */
+    protected function getStyles()
+    {
+        $styles = <<<EOCSS
 .smd_textile_bar {
     display: flex;
     flex-wrap: wrap;
@@ -604,51 +674,19 @@ class smd_textile_bar
 }
 EOCSS;
 
-        $aclass = array();
-        $use_icons = get_pref('smd_textile_bar_icons');
-        $aclass[] = (get_pref('smd_textile_bar_buttons')) ? 'smd_textile_bar--buttons' : '';
-        $aclass[] = ($use_icons) ? 'smd_textile_bar--icons' : 'smd_textile_bar--text';
-        $class_str = implode(' ', $aclass);
+        return $styles;
+    }
 
-        foreach ($fields as $field) {
-            $html = array();
-            $html[] = '<div class="smd_textile_bar '.$field.' '.$class_str.'">';
-
-            foreach ($buttons as $key => $opts) {
-                if (!get_pref('smd_textile_bar_'.$key)) {
-                    continue;
-                }
-
-                $params = array();
-
-                foreach ($opts as $data => $val) {
-                    $params[] = 'data-'.$data.'="'.htmlentities($val).'"';
-                }
-
-                if ($use_icons) {
-                    $content = '&nbsp;';
-                    $title = ' title="'.gTxt('smd_textile_bar_btn_'.$key).'"';
-                } else {
-                    $content = gTxt('smd_textile_bar_btn_'.$key);
-                    $title = '';
-                }
-
-                $html[] = '<a class="smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
-
-            }
-
-            $html[] = '</div>';
-            $html_str = implode(n, $html);
-            $js .=
-                '$(document).ready(function(){'.
-                    '$("textarea#'.escape_js($field).'").before("'.escape_js($html_str).'")'.
-                '});';
-        }
-
+    /**
+     * Return the JavaScript used in the plugin.
+     *
+     * @return string CSS
+     */
+    protected function getJS()
+    {
         $formlist = json_encode(array_keys($this->getFormsOfType(get_pref('smd_textile_bar_form'))));
 
-        $js .= <<<EOF
-
+        $js = <<<EOJS
 (function($, len, createRange, duplicate){
 
     var opt = {}, is = {}, form = {$formlist}, words = {}, lines = {};
@@ -1056,24 +1094,8 @@ $(document).ready(function(){
 
 });
 
-EOF;
-
-        // Drop the CSS, JavaScript and SVG icons on the page.
-        echo '<style>' . $style . '</style>';
-        echo script_js($js);
-        echo $icons;
-    }
-
-    /**
-     * Redirects to the preferences panel
-     */
-    public function prefs()
-    {
-        header('Location: ?event=prefs#prefs_group_smd_textile_bar');
-        echo
-            '<p id="message">'.n.
-            '   <a href="?event=prefs#prefs_group_smd_textile_bar">'.gTxt('continue').'</a>'.n.
-            '</p>';
+EOJS;
+        return $js;
     }
 }
 
