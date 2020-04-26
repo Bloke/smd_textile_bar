@@ -108,7 +108,7 @@ smd_textile_bar_strong => Show strong (bold)
 smd_textile_bar_ol => Show ordered list (ol)
 smd_textile_bar_output_form => Show form
 smd_textile_bar_sub => Show subscript (sub)
-smd_textile_bar_sup => Show supersrcipt (sup)
+smd_textile_bar_sup => Show superscript (sup)
 smd_textile_bar_ul => Show unordered list (ul)
 EOT;
 
