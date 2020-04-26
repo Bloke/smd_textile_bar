@@ -18,7 +18,7 @@ $plugin['name'] = 'smd_textile_bar';
 # $plugin['allow_html_help'] = 1;
 
 $plugin['version'] = '0.1.0';
-$plugin['author'] = 'Stef Dawson / Jukka Svahn / Patrick Woods';
+$plugin['author'] = 'Stef Dawson / Julian Reisenberger / Jukka Svahn / Patrick Woods';
 $plugin['author_uri'] = 'https://stefdawson.com/';
 $plugin['description'] = 'Textile bar for the Write panel in Textpattern CMS';
 
@@ -110,6 +110,181 @@ smd_textile_bar_sup => Show supersrcipt (sup)
 smd_textile_bar_ul => Show unordered list (ul)
 EOT;
 
+// Icon pack.
+$plugin['data'] = <<<ENDICONS
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<symbol id="smd-icon-strong" viewBox="0 0 24 24">
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2" d="M12 11.667h-4M12 11.667c0 0 3.333 0 3.333-3.333s-3.333-3.333-3.333-3.333 0 0 0 0h-3.4c-0.331 0-0.6 0.269-0.6 0.6v6.067M12 11.667c0 0 4 0 4 3.667s-4 3.667-4 3.667 0 0 0 0h-3.4c-0.331 0-0.6-0.269-0.6-0.6v-6.733"></path>
+</symbol>
+<symbol id="smd-icon-emphasis" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M11 5h3M17 5h-3M14 5l-4 14M10 19h-3M10 19h3"></path>
+</symbol>
+<symbol id="smd-icon-underline" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M16 5v6c0 2.209-1.791 4-4 4v0c-2.209 0-4-1.791-4-4v-6"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6 19h12"></path>
+</symbol>
+<symbol id="smd-icon-strikethrough" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M16.3 6.8c-1.1-1.1-3-1.8-4.7-1.9-2.1 0-3.9 0.9-3.9 3.5 0 4.7 8.6 2.4 8.6 7.1 0 2.7-2.3 3.8-4.7 3.8-1.8-0.1-3.7-0.8-4.7-2.2"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.5 11.7h14.2"></path>
+</symbol>
+<symbol id="smd-icon-heading" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.8 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M17.2 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.8 12h10.4"></path>
+</symbol>
+<symbol id="smd-icon-h1" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21.5 12v7"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21.5 12l-2.5 1.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
+</symbol>
+<symbol id="smd-icon-h2" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.4 19h-4.2l2.9-3.5c0 0 1.8-1.9 0.1-3.1-1.1-0.8-2.2-0.4-2.9 0.6"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
+</symbol>
+<symbol id="smd-icon-h3" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M18.2 12c1.2 0 2.4 0 3.6 0-0.7 0.9-1.3 1.9-2 2.8h0.2c1.4 0 2.4 0.9 2.4 2.1s-1.1 2.1-2.4 2.1c-0.2 0-0.6 0-1-0.2-0.3-0.1-0.7-0.3-0.8-0.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
+</symbol>
+<symbol id="smd-icon-h4" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21.8 12l-3.5 5.2h4.1v1.8"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
+</symbol>
+<symbol id="smd-icon-h5" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21.8 12c-1.2 0-2.5 0-3.6 0v3.3c0.3 0 0.9-0.2 1.6-0.2 0.1 0 0.1 0 0.1 0 1.5-0.1 2.5 0.7 2.5 1.9 0 1.3-1.1 2.1-2.5 2.1-0.2 0-0.6 0-1-0.2-0.4-0.1-0.7-0.4-0.8-0.5"></path>
+</symbol>
+<symbol id="smd-icon-h6" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.4 16.9c0 1.16-0.985 2.1-2.2 2.1s-2.2-0.94-2.2-2.1c0-1.16 0.985-2.1 2.2-2.1s2.2 0.94 2.2 2.1z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M20.3 12l-2.1 3.8"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
+</symbol>
+<symbol id="smd-icon-hx" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M17.4 19l2.5-2.5M22.4 14l-2.5 2.5M19.9 16.5l-2.5-2.5M19.9 16.5l2.5 2.5"></path>
+</symbol>
+<symbol id="smd-icon-sup" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.5 9.8l8.2 8.2"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M14.7 9.8l-8.2 8.2"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.4 13.4h-4.1l2.9-3.5c0 0 1.7-1.8 0.1-3-1-0.8-2.2-0.3-2.9 0.6"></path>
+</symbol>
+<symbol id="smd-icon-sub" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.5 9.8l8.2 8.2"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M14.7 9.8l-8.2 8.2"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.4 20.8h-4.1l2.9-3.5c0 0 1.7-1.8 0.1-3-1-0.8-2.2-0.3-2.9 0.6"></path>
+</symbol>
+<symbol id="smd-icon-ul" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4" d="M4 6v0"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4" d="M4 15.3v0"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.8 6h9.2"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.8 15.3h9.2"></path>
+</symbol>
+<symbol id="smd-icon-ol" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.8 6h9.2"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M2.9 4.6l1.9-1.2v5.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.1 18h-3.2l2.2-2.7c0 0 1.4-1.5 0.1-2.4-0.8-0.6-1.7-0.3-2.2 0.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.8 15.3h9.2"></path>
+</symbol>
+<symbol id="smd-icon-acronym" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M1.5 15.6l0.8-1.6M8 15.6l-0.8-1.6M7.3 13.9l-2.5-5.4-2.5 5.5M7.3 13.9h-5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.6 11.9h2.3c0.7 0 2.1 0 2.1-1.8s-1.4-1.8-2.1-1.8h-2.3z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.6 11.9h2.7c0.7 0 2.1 0 2.1 1.8s-1.4 1.8-2.1 1.8h-2.7z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.5 8.7c-0.4-0.2-0.8-0.2-1.3-0.2-1.9 0-3.5 1.6-3.5 3.5s1.6 3.5 3.5 3.5c0.5 0 0.9-0.1 1.3-0.2"></path>
+</symbol>
+<symbol id="smd-icon-abbr" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.5 15.5h-3.3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.5 8.5h-3.3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M20.8 15.5v-7"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M15.8 8.6l-3.2 3.9-3.2-4"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M12.6 12.5v3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M1.5 8.5v7"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M1.5 12h3.3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M1.5 8.5h4.5"></path>
+</symbol>
+<symbol id="smd-icon-ins" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21.5 8.5h-2.2c-1 0-1.8 0.8-1.8 1.8s0.8 1.8 1.8 1.8h1.5c1 0 1.8 0.8 1.8 1.8s-0.8 1.8-1.8 1.8h-3.2"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.8 15.5h-3.3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.8 8.5h-3.3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M3.1 15.5v-7"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M8.5 15.5v-7l5.4 7v-7"></path>
+</symbol>
+<symbol id="smd-icon-del" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9.8 8.5v7"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9.8 12h3.3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9.8 15.5h4.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9.8 8.5h4.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M17.5 15.5v-7"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.3 15.5c-1.9 0-4 0-4.8 0"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M1.5 12v-3.5c2.5 0 5 0 5 3.5s-2.5 3.5-5 3.5z"></path>
+</symbol>
+<symbol id="smd-icon-link" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M14 11.998c0-2.492-2.317-4.998-5.143-4.998-0.335 0-1.438 0-1.714 0-2.84 0-5.143 2.238-5.143 4.998 0 2.378 1.71 4.369 4 4.874 0.368 0.081 0.75 0.124 1.143 0.124"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10 11.998c0 2.492 2.317 4.998 5.143 4.998 0.335 0 1.438 0 1.714 0 2.84 0 5.143-2.238 5.143-4.998 0-2.378-1.71-4.369-4-4.874-0.368-0.081-0.75-0.124-1.143-0.124"></path>
+</symbol>
+<symbol id="smd-icon-code" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.5 6l-3.5 12.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.5 8.5l-3.5 3.5 3.5 3.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M17.5 8.5l3.5 3.5-3.5 3.5"></path>
+</symbol>
+<symbol id="smd-icon-bc" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13 7.3l-2.3 8.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M8.2 9l-2.3 2.3 2.3 2.3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M15.8 9l2.3 2.3-2.3 2.3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M2 17.9v-12.8c0-1.1 0.9-2.1 2-2.1h16c1.1 0 2 1 2 2.1v12.7c0 1.2-0.9 2.1-2 2.1h-16c-1.1 0.1-2-0.9-2-2z"></path>
+</symbol>
+<symbol id="smd-icon-bq" viewBox="0 0 24 24">
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2" d="M3 20.3v-15.3c0-1.1 0.9-2 2-2h14c1.1 0 2 0.9 2 2v10c0 1.1-0.9 2-2 2h-11c-0.6 0-1.2 0.3-1.6 0.8l-2.3 2.9c-0.4 0.4-1.1 0.2-1.1-0.4z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M16.5 10.5c0.3 0 0.5-0.2 0.5-0.5s-0.2-0.5-0.5-0.5-0.5 0.2-0.5 0.5 0.2 0.5 0.5 0.5z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M12 10.5c0.3 0 0.5-0.2 0.5-0.5s-0.2-0.5-0.5-0.5-0.5 0.2-0.5 0.5 0.2 0.5 0.5 0.5z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M7.5 10.5c0.3 0 0.5-0.2 0.5-0.5s-0.2-0.5-0.5-0.5-0.5 0.2-0.5 0.5 0.2 0.5 0.5 0.5z"></path>
+</symbol>
+<symbol id="smd-icon-image" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M5 3h14c1.105 0 2 0.895 2 2v14c0 1.105-0.895 2-2 2h-14c-1.105 0-2-0.895-2-2v-14c0-1.105 0.895-2 2-2z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10 8.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21 15l-5-5-11 11"></path>
+</symbol>
+<symbol id="smd-icon-file" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9 12h3M15 12h-3M12 12v-3M12 12v3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4 21.4v-18.8c0-0.331 0.269-0.6 0.6-0.6h11.652c0.159 0 0.312 0.063 0.424 0.176l3.149 3.149c0.113 0.113 0.176 0.265 0.176 0.424v15.651c0 0.331-0.269 0.6-0.6 0.6h-14.8c-0.331 0-0.6-0.269-0.6-0.6z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M16 5.4v-3.046c0-0.195 0.158-0.354 0.354-0.354 0.094 0 0.184 0.037 0.25 0.104l3.293 3.293c0.066 0.066 0.104 0.156 0.104 0.25 0 0.195-0.158 0.354-0.354 0.354h-3.046c-0.331 0-0.6-0.269-0.6-0.6z"></path>
+</symbol>
+<symbol id="smd-icon-form" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9 12h3M15 12h-3M12 12v-3M12 12v3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M11.7 1.173c0.186-0.107 0.414-0.107 0.6 0l8.926 5.154c0.186 0.107 0.3 0.305 0.3 0.52v10.307c0 0.214-0.114 0.412-0.3 0.52l-8.926 5.154c-0.186 0.107-0.414 0.107-0.6 0l-8.926-5.154c-0.186-0.107-0.3-0.305-0.3-0.52v-10.307c0-0.214 0.114-0.412 0.3-0.52l8.926-5.154z"></path>
+</symbol>
+<symbol id="smd-icon-short-tag-circle" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M8 12h4M16 12h-4M12 12v-4M12 12v4"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M12 22c5.523 0 10-4.477 10-10s-4.477-10-10-10c-5.523 0-10 4.477-10 10s4.477 10 10 10z"></path>
+</symbol>
+<symbol id="smd-icon-strong_de" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.9 11.7h-5.9"></path>
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2" d="M12.4 5h-3.8c-0.3 0-0.6 0.3-0.6 0.6v6.1"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M8 19v-7.3"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M15.4 5h-3"></path>
+</symbol>
+<symbol id="smd-icon-emphasis_de" viewBox="0 0 24 24">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9.9 5l-2.9 14"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M16.1 19l-5.2-7.4"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M18.2 5l-10.1 9"></path>
+</symbol>
+</defs>
+</svg>
+ENDICONS;
+
 if (!defined('txpinterface'))
         @include_once('zem_tpl.php');
 
@@ -117,7 +292,7 @@ if (!defined('txpinterface'))
 /**
  * smd_textile_bar plugin for Textpattern CMS
  *
- * @author Stef Dawson / Jukka Svahn / Patrick Woods
+ * @author Stef Dawson / Julian Reisenberger / Jukka Svahn / Patrick Woods
  * @license GNU GPLv2
  * @link http://github.com/Bloke/smd_textile_bar
  */
@@ -152,7 +327,7 @@ class smd_textile_bar
     }
 
     /**
-     * Installer
+     * Installer.
      *
      * @param string $evt Admin-side event.
      * @param string $stp  Admin-side event, plugin-lifecycle step.
@@ -161,6 +336,8 @@ class smd_textile_bar
     {
         global $prefs;
 
+        // Remove prefs if plugin deleted.
+        // Also remove rah_textile_bar prefs, since the plugins can't co-exist.
         if ($stp == 'deleted') {
             safe_delete(
                 'txp_prefs',
@@ -170,12 +347,14 @@ class smd_textile_bar
             return;
         }
 
+        // If the installed plugin is the current one, skip installation.
         $current = isset($prefs['smd_textile_bar_version']) ?
             $prefs['smd_textile_bar_version'] : 'base';
 
         if ($current == $this->version)
             return;
 
+        // Install the prefs.
         $position = 230;
 
         $values['features'] = array_keys($this->buttons());
@@ -204,11 +383,13 @@ class smd_textile_bar
             }
         }
 
+        // Remove obsolete prefs.
         safe_delete(
             'txp_prefs',
-            "name LIKE 'rah\_textile\_bar\_h_' OR name='smd_textile_bar_codeline'"
+            "name LIKE 'rah\_textile\_bar\_h_' OR name='rah_textile_bar_codeline'"
         );
 
+        // Update the installed version number.
         set_pref('smd_textile_bar_version', $this->version, $this->event, 2, '', 0);
         $prefs['smd_textile_bar_version'] = $this->version;
     }
@@ -368,6 +549,7 @@ class smd_textile_bar
         }
 
         $js = '';
+        $icons = \Txp::get('\Textpattern\Plugin\Plugin')->fetchData($this->event);
         $style = <<<EOCSS
 .smd_textile_bar {
     display: flex;
@@ -876,9 +1058,11 @@ $(document).ready(function(){
 
 EOF;
 
-    echo '<style>' . $style . '</style>';
-    echo script_js($js);
-}
+        // Drop the CSS, JavaScript and SVG icons on the page.
+        echo '<style>' . $style . '</style>';
+        echo script_js($js);
+        echo $icons;
+    }
 
     /**
      * Redirects to the preferences panel
