@@ -668,8 +668,11 @@ class smd_textile_bar
     padding: 0.2em;
     border: 1px solid #ccc;
     border-bottom-width: 0;
-    background-color: #eee;
-    background-image: linear-gradient(#eee,#ddd);
+    background-color: inherit;
+}
+.darkmode .smd_textile_bar--text,
+.darkmode .smd_textile_bar--icons {
+    border: 1px solid #222;
 }
 .smd_textile_bar--text a,
 .smd_textile_bar--icons a {
@@ -681,8 +684,7 @@ class smd_textile_bar
 }
 .smd_textile_bar--text a:hover,
 .smd_textile_bar--icons a:hover {
-    background-color: #ccc;
-    color: #000;
+    color: inherit;
     border-radius: 0.25em;
     text-decoration: none;
 }
@@ -690,10 +692,6 @@ class smd_textile_bar
     border-width: 0;
     background: none;
     padding: 0.35em 0.5em .25em;
-}
-.smd_textile_bar--icons a:hover {
-    background-color: #c8c8c8;
-    background-image: linear-gradient(#d8d8d8,#c8c8c8);
 }
 .smd_textile_bar--buttons.smd_textile_bar--text {
     background: none;
@@ -703,13 +701,11 @@ class smd_textile_bar
 .smd_textile_bar--buttons.smd_textile_bar--text a {
     margin: .35em .35em 0 0;
     border-radius: .35em;
-    background-color: #ddd;
-    background-image: linear-gradient(#eee,#ddd);
+    background-color: inherit;
     border-color: #ccc;
 }
 .smd_textile_bar--buttons.smd_textile_bar--text a:hover {
-    background-color: #e8e8e8;
-    background-image: linear-gradient(#f8f8f8,#e8e8e8);
+    background-color: inherit;
     border-color: #aaa;
 }
 .smd_textile_bar--buttons.smd_textile_bar--icons a {
