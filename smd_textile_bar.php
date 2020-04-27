@@ -652,7 +652,6 @@ class smd_textile_bar
 .smd_textile_bar {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 0 0.2em;
 }
 .smd_textile_bar--buttons a {
     margin: 0.15em;
@@ -670,8 +669,8 @@ class smd_textile_bar
     border-bottom-width: 0;
     background-color: inherit;
 }
-.darkmode .smd_textile_bar--text,
-.darkmode .smd_textile_bar--icons {
+body.darkmode .smd_textile_bar--text,
+body.darkmode .smd_textile_bar--icons {
     border: 1px solid #222;
 }
 .smd_textile_bar--text a,
