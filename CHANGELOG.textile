@@ -1,9 +1,13 @@
 h1. Changelog
 
-h2. 0.1.1 - 2020-26-04
+h2. 0.1.2 - 2020-04-27
+
+* Improve Dark Mode support (thanks, phiw13)
+
+h2. 0.1.1 - 2020-04-26
 
 * Fix lost superscript button when using combined headings (thanks, jools-r).
 
-h2. 0.1.0 - 2020-26-04
+h2. 0.1.0 - 2020-04-26
 
 * Initial release for Txp 4.7+.

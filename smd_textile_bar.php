@@ -17,7 +17,7 @@ $plugin['name'] = 'smd_textile_bar';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '0.1.1';
+$plugin['version'] = '0.1.2';
 $plugin['author'] = 'Stef Dawson / Julian Reisenberger / Jukka Svahn / Patrick Woods';
 $plugin['author_uri'] = 'https://stefdawson.com/';
 $plugin['description'] = 'Textile bar for the Write panel in Textpattern CMS';
