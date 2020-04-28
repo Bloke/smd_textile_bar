@@ -379,14 +379,20 @@ class smd_textile_bar
 
         $js = '';
         $aclass = array();
+        $use_buttons = get_pref('smd_textile_bar_buttons');
         $use_icons = get_pref('smd_textile_bar_icons');
-        $aclass[] = (get_pref('smd_textile_bar_buttons')) ? 'smd_textile_bar--buttons' : '';
-        $aclass[] = ($use_icons) ? 'smd_textile_bar--icons' : 'smd_textile_bar--text';
+        if ($use_buttons) {
+            if ($use_icons) {
+                $aclass[] = 'ui-controlgroup smd_textile_bar-tooltips';
+            }
+        } else {
+            $aclass[] = 'ui-controlgroup';
+        }
         $class_str = implode(' ', $aclass);
 
         foreach ($fields as $field) {
             $html = array();
-            $html[] = '<div class="ui-controlgroup ui-helper-clearfix smd_textile_bar '.$field.' '.$class_str.'">';
+            $html[] = '<div class="smd_textile_bar '.$field.' '.$class_str.'">';
             $used_headings = array();
             $headings_done = false;
 
@@ -407,11 +413,11 @@ class smd_textile_bar
                         'level' => filter_var($used_headings[0], FILTER_SANITIZE_NUMBER_INT)
                     );
 
-                    $html[] = $this->getButton($field, 'hx', $head_opts, compact('use_icons'));
+                    $html[] = $this->getButton($field, 'hx', $head_opts, compact('use_icons', 'use_buttons'));
                     $headings_done = true;
                 }
 
-                $html[] = $this->getButton($field, $key, $opts, compact('use_icons'));
+                $html[] = $this->getButton($field, $key, $opts, compact('use_icons', 'use_buttons'));
             }
 
             $html[] = '</div>';
@@ -452,12 +458,18 @@ class smd_textile_bar
         if ($extras['use_icons']) {
             $content = '<span class="ui-icon ui-icon-smd_textile_bar-'.$key.'">'.gTxt('smd_textile_bar_btn_'.$key).'</span>';
             $title = ' title="'.gTxt('smd_textile_bar_btn_'.$key).'"';
+            $class= '';
         } else {
             $content = gTxt('smd_textile_bar_btn_'.$key);
             $title = '';
+            if ($extras['use_buttons']) {
+                $class= ' ui-corner-all';
+            } else {
+                $class= '';
+            }
         }
 
-        return '<a role="button" class="ui-button smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
+        return '<a role="button" class="ui-button'.$class.' smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
     }
 
     /**
@@ -487,11 +499,11 @@ class smd_textile_bar
 }
 
 /* Tooltip styles */
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn {
+.smd_textile_bar-tooltips .smd_textile_bar_btn {
   position: relative;
 }
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::before,
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::after {
+.smd_textile_bar-tooltips .smd_textile_bar_btn::before,
+.smd_textile_bar-tooltips .smd_textile_bar_btn::after {
   text-transform: none;
   font-size: .9em;
   line-height: 1;
@@ -503,7 +515,7 @@ class smd_textile_bar
   left: 50%;
   transform: translate(-50%, -.25em);
 }
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::before {
+.smd_textile_bar-tooltips .smd_textile_bar_btn::before {
   content: '';
   border: 5px solid transparent;
   z-index: 1001;
@@ -511,7 +523,7 @@ class smd_textile_bar
   border-bottom-width: 0;
   border-top-color: #333;
 }
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::after {
+.smd_textile_bar-tooltips .smd_textile_bar_btn::after {
   content: attr(title);
   text-align: center;
   min-width: 3em;
@@ -527,15 +539,15 @@ class smd_textile_bar
   z-index: 1000;
   bottom: calc(100% + 5px);
 }
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn:hover::before,
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn:hover::after {
+.smd_textile_bar-tooltips .smd_textile_bar_btn:hover::before,
+.smd_textile_bar-tooltips .smd_textile_bar_btn:hover::after {
   display: block;
   opacity: 1;
 }
 
 /* don't show empty tooltips */
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn[title='']::before,
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn[title='']::after {
+.smd_textile_bar-tooltips .smd_textile_bar_btn[title='']::before,
+.smd_textile_bar-tooltips .smd_textile_bar_btn[title='']::after {
   display: none !important;
 }
 
