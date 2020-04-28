@@ -132,7 +132,7 @@ if (txpinterface === 'admin') {
 class smd_textile_bar
 {
     protected $event = 'smd_textile_bar';
-    protected $version = '0.1.0';
+    protected $version = '0.1.2';
     protected $privs = '1,2';
     protected $all_privs = '1,2,3,4,5,6';
 
