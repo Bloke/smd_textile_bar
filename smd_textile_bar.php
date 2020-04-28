@@ -112,175 +112,6 @@ smd_textile_bar_sup => Show superscript (sup)
 smd_textile_bar_ul => Show unordered list (ul)
 EOT;
 
-// Icon pack.
-$plugin['data'] = <<<ENDICONS
-<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<defs>
-<symbol id="smd-icon-strong" viewBox="0 0 24 24">
-<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2" d="M12 11.667h-4M12 11.667c0 0 3.333 0 3.333-3.333s-3.333-3.333-3.333-3.333 0 0 0 0h-3.4c-0.331 0-0.6 0.269-0.6 0.6v6.067M12 11.667c0 0 4 0 4 3.667s-4 3.667-4 3.667 0 0 0 0h-3.4c-0.331 0-0.6-0.269-0.6-0.6v-6.733"></path>
-</symbol>
-<symbol id="smd-icon-emphasis" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M11 5h3M17 5h-3M14 5l-4 14M10 19h-3M10 19h3"></path>
-</symbol>
-<symbol id="smd-icon-underline" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M16 5v6c0 2.209-1.791 4-4 4v0c-2.209 0-4-1.791-4-4v-6"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6 19h12"></path>
-</symbol>
-<symbol id="smd-icon-strikethrough" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M16.3 6.8c-1.1-1.1-3-1.8-4.7-1.9-2.1 0-3.9 0.9-3.9 3.5 0 4.7 8.6 2.4 8.6 7.1 0 2.7-2.3 3.8-4.7 3.8-1.8-0.1-3.7-0.8-4.7-2.2"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.5 11.7h14.2"></path>
-</symbol>
-<symbol id="smd-icon-heading" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.8 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M17.2 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.8 12h10.4"></path>
-</symbol>
-<symbol id="smd-icon-h1" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21.5 12v7"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21.5 12l-2.5 1.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
-</symbol>
-<symbol id="smd-icon-h2" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.4 19h-4.2l2.9-3.5c0 0 1.8-1.9 0.1-3.1-1.1-0.8-2.2-0.4-2.9 0.6"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
-</symbol>
-<symbol id="smd-icon-h3" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M18.2 12c1.2 0 2.4 0 3.6 0-0.7 0.9-1.3 1.9-2 2.8h0.2c1.4 0 2.4 0.9 2.4 2.1s-1.1 2.1-2.4 2.1c-0.2 0-0.6 0-1-0.2-0.3-0.1-0.7-0.3-0.8-0.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
-</symbol>
-<symbol id="smd-icon-h4" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21.8 12l-3.5 5.2h4.1v1.8"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
-</symbol>
-<symbol id="smd-icon-h5" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21.8 12c-1.2 0-2.5 0-3.6 0v3.3c0.3 0 0.9-0.2 1.6-0.2 0.1 0 0.1 0 0.1 0 1.5-0.1 2.5 0.7 2.5 1.9 0 1.3-1.1 2.1-2.5 2.1-0.2 0-0.6 0-1-0.2-0.4-0.1-0.7-0.4-0.8-0.5"></path>
-</symbol>
-<symbol id="smd-icon-h6" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.4 16.9c0 1.16-0.985 2.1-2.2 2.1s-2.2-0.94-2.2-2.1c0-1.16 0.985-2.1 2.2-2.1s2.2 0.94 2.2 2.1z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M20.3 12l-2.1 3.8"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
-</symbol>
-<symbol id="smd-icon-hx" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.7 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 5v14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.3 12h9.4"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M17.4 19l2.5-2.5M22.4 14l-2.5 2.5M19.9 16.5l-2.5-2.5M19.9 16.5l2.5 2.5"></path>
-</symbol>
-<symbol id="smd-icon-sup" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.5 9.8l8.2 8.2"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M14.7 9.8l-8.2 8.2"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.4 13.4h-4.1l2.9-3.5c0 0 1.7-1.8 0.1-3-1-0.8-2.2-0.3-2.9 0.6"></path>
-</symbol>
-<symbol id="smd-icon-sub" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.5 9.8l8.2 8.2"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M14.7 9.8l-8.2 8.2"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.4 20.8h-4.1l2.9-3.5c0 0 1.7-1.8 0.1-3-1-0.8-2.2-0.3-2.9 0.6"></path>
-</symbol>
-<symbol id="smd-icon-ul" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4" d="M4 6v0"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4" d="M4 15.3v0"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.8 6h9.2"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.8 15.3h9.2"></path>
-</symbol>
-<symbol id="smd-icon-ol" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.8 6h9.2"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M2.9 4.6l1.9-1.2v5.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.1 18h-3.2l2.2-2.7c0 0 1.4-1.5 0.1-2.4-0.8-0.6-1.7-0.3-2.2 0.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10.8 15.3h9.2"></path>
-</symbol>
-<symbol id="smd-icon-acronym" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.5 15.5h-3.3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.5 8.5h-3.3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M20.8 15.5v-7"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M15.8 8.6l-3.2 3.9-3.2-4"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M12.6 12.5v3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M1.5 8.5v7"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M1.5 12h3.3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M1.5 8.5h4.5"></path>
-</symbol>
-<symbol id="smd-icon-ins" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21.5 8.5h-2.2c-1 0-1.8 0.8-1.8 1.8s0.8 1.8 1.8 1.8h1.5c1 0 1.8 0.8 1.8 1.8s-0.8 1.8-1.8 1.8h-3.2"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.8 15.5h-3.3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4.8 8.5h-3.3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M3.1 15.5v-7"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M8.5 15.5v-7l5.4 7v-7"></path>
-</symbol>
-<symbol id="smd-icon-del" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9.8 8.5v7"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9.8 12h3.3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9.8 15.5h4.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9.8 8.5h4.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M17.5 15.5v-7"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M22.3 15.5c-1.9 0-4 0-4.8 0"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M1.5 12v-3.5c2.5 0 5 0 5 3.5s-2.5 3.5-5 3.5z"></path>
-</symbol>
-<symbol id="smd-icon-link" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M14 11.998c0-2.492-2.317-4.998-5.143-4.998-0.335 0-1.438 0-1.714 0-2.84 0-5.143 2.238-5.143 4.998 0 2.378 1.71 4.369 4 4.874 0.368 0.081 0.75 0.124 1.143 0.124"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10 11.998c0 2.492 2.317 4.998 5.143 4.998 0.335 0 1.438 0 1.714 0 2.84 0 5.143-2.238 5.143-4.998 0-2.378-1.71-4.369-4-4.874-0.368-0.081-0.75-0.124-1.143-0.124"></path>
-</symbol>
-<symbol id="smd-icon-code" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.5 6l-3.5 12.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M6.5 8.5l-3.5 3.5 3.5 3.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M17.5 8.5l3.5 3.5-3.5 3.5"></path>
-</symbol>
-<symbol id="smd-icon-bc" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13 7.3l-2.3 8.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M8.2 9l-2.3 2.3 2.3 2.3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M15.8 9l2.3 2.3-2.3 2.3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M2 17.9v-12.8c0-1.1 0.9-2.1 2-2.1h16c1.1 0 2 1 2 2.1v12.7c0 1.2-0.9 2.1-2 2.1h-16c-1.1 0.1-2-0.9-2-2z"></path>
-</symbol>
-<symbol id="smd-icon-bq" viewBox="0 0 24 24">
-<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2" d="M3 20.3v-15.3c0-1.1 0.9-2 2-2h14c1.1 0 2 0.9 2 2v10c0 1.1-0.9 2-2 2h-11c-0.6 0-1.2 0.3-1.6 0.8l-2.3 2.9c-0.4 0.4-1.1 0.2-1.1-0.4z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M16.5 10.5c0.3 0 0.5-0.2 0.5-0.5s-0.2-0.5-0.5-0.5-0.5 0.2-0.5 0.5 0.2 0.5 0.5 0.5z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M12 10.5c0.3 0 0.5-0.2 0.5-0.5s-0.2-0.5-0.5-0.5-0.5 0.2-0.5 0.5 0.2 0.5 0.5 0.5z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M7.5 10.5c0.3 0 0.5-0.2 0.5-0.5s-0.2-0.5-0.5-0.5-0.5 0.2-0.5 0.5 0.2 0.5 0.5 0.5z"></path>
-</symbol>
-<symbol id="smd-icon-image" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M5 3h14c1.105 0 2 0.895 2 2v14c0 1.105-0.895 2-2 2h-14c-1.105 0-2-0.895-2-2v-14c0-1.105 0.895-2 2-2z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M10 8.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M21 15l-5-5-11 11"></path>
-</symbol>
-<symbol id="smd-icon-file" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9 12h3M15 12h-3M12 12v-3M12 12v3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M4 21.4v-18.8c0-0.331 0.269-0.6 0.6-0.6h11.652c0.159 0 0.312 0.063 0.424 0.176l3.149 3.149c0.113 0.113 0.176 0.265 0.176 0.424v15.651c0 0.331-0.269 0.6-0.6 0.6h-14.8c-0.331 0-0.6-0.269-0.6-0.6z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M16 5.4v-3.046c0-0.195 0.158-0.354 0.354-0.354 0.094 0 0.184 0.037 0.25 0.104l3.293 3.293c0.066 0.066 0.104 0.156 0.104 0.25 0 0.195-0.158 0.354-0.354 0.354h-3.046c-0.331 0-0.6-0.269-0.6-0.6z"></path>
-</symbol>
-<symbol id="smd-icon-form" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9 12h3M15 12h-3M12 12v-3M12 12v3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M11.7 1.173c0.186-0.107 0.414-0.107 0.6 0l8.926 5.154c0.186 0.107 0.3 0.305 0.3 0.52v10.307c0 0.214-0.114 0.412-0.3 0.52l-8.926 5.154c-0.186 0.107-0.414 0.107-0.6 0l-8.926-5.154c-0.186-0.107-0.3-0.305-0.3-0.52v-10.307c0-0.214 0.114-0.412 0.3-0.52l8.926-5.154z"></path>
-</symbol>
-<symbol id="smd-icon-short-tag-circle" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M8 12h4M16 12h-4M12 12v-4M12 12v4"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M12 22c5.523 0 10-4.477 10-10s-4.477-10-10-10c-5.523 0-10 4.477-10 10s4.477 10 10 10z"></path>
-</symbol>
-<symbol id="smd-icon-strong_de" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M13.9 11.7h-5.9"></path>
-<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2" d="M12.4 5h-3.8c-0.3 0-0.6 0.3-0.6 0.6v6.1"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M8 19v-7.3"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M15.4 5h-3"></path>
-</symbol>
-<symbol id="smd-icon-emphasis_de" viewBox="0 0 24 24">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M9.9 5l-2.9 14"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M16.1 19l-5.2-7.4"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M18.2 5l-10.1 9"></path>
-</symbol>
-</defs>
-</svg>
-ENDICONS;
-
 if (!defined('txpinterface'))
         @include_once('zem_tpl.php');
 
@@ -548,9 +379,15 @@ class smd_textile_bar
 
         $js = '';
         $aclass = array();
+        $use_buttons = get_pref('smd_textile_bar_buttons');
         $use_icons = get_pref('smd_textile_bar_icons');
-        $aclass[] = (get_pref('smd_textile_bar_buttons')) ? 'smd_textile_bar--buttons' : '';
-        $aclass[] = ($use_icons) ? 'smd_textile_bar--icons' : 'smd_textile_bar--text';
+        if ($use_buttons) {
+            if ($use_icons) {
+                $aclass[] = 'ui-controlgroup smd_textile_bar-tooltips';
+            }
+        } else {
+            $aclass[] = 'ui-controlgroup';
+        }
         $class_str = implode(' ', $aclass);
 
         foreach ($fields as $field) {
@@ -576,11 +413,11 @@ class smd_textile_bar
                         'level' => filter_var($used_headings[0], FILTER_SANITIZE_NUMBER_INT)
                     );
 
-                    $html[] = $this->getButton($field, 'hx', $head_opts, compact('use_icons'));
+                    $html[] = $this->getButton($field, 'hx', $head_opts, compact('use_icons', 'use_buttons'));
                     $headings_done = true;
                 }
 
-                $html[] = $this->getButton($field, $key, $opts, compact('use_icons'));
+                $html[] = $this->getButton($field, $key, $opts, compact('use_icons', 'use_buttons'));
             }
 
             $html[] = '</div>';
@@ -619,14 +456,20 @@ class smd_textile_bar
         }
 
         if ($extras['use_icons']) {
-            $content = '<svg class="smd-icon-'.$key.'"><use xlink:href="#smd-icon-'.$key.'"></use></svg>';
+            $content = '<span class="ui-icon ui-icon-smd_textile_bar-'.$key.'">'.gTxt('smd_textile_bar_btn_'.$key).'</span>';
             $title = ' title="'.gTxt('smd_textile_bar_btn_'.$key).'"';
+            $class= '';
         } else {
             $content = gTxt('smd_textile_bar_btn_'.$key);
             $title = '';
+            if ($extras['use_buttons']) {
+                $class= ' ui-corner-all';
+            } else {
+                $class= '';
+            }
         }
 
-        return '<a class="smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
+        return '<a role="button" class="ui-button'.$class.' smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
     }
 
     /**
@@ -649,84 +492,21 @@ class smd_textile_bar
     protected function getStyles()
     {
         $styles = <<<EOCSS
-.smd_textile_bar {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 0 0.2em;
+.smd_textile_bar .ui-icon {
+    width: 1.538461538461538em;
+    height: 1.538461538461538em;
+    background-size: 1.538461538461538em 1.538461538461538em;
 }
-.smd_textile_bar--buttons a {
-    margin: 0.15em;
-    padding: 0.25em 0.5em;
-    border: 1px solid #888;
-    border-radius: 4px;
-    background: #ddd;
-    color: #333;
-}
-.smd_textile_bar--text,
-.smd_textile_bar--icons {
-    margin: 0;
-    padding: 0.2em;
-    border: 1px solid #ccc;
-    border-bottom-width: 0;
-    background-color: inherit;
-}
-.darkmode .smd_textile_bar--text,
-.darkmode .smd_textile_bar--icons {
-    border: 1px solid #222;
-}
-.smd_textile_bar--text a,
-.smd_textile_bar--icons a {
-    margin: 0 0.2em 0 0;
-    padding: 0.5em 0.65em;
-    color: #333;
-    font-size: 1em;
-    line-height: 1;
-}
-.smd_textile_bar--text a:hover,
-.smd_textile_bar--icons a:hover {
-    color: inherit;
-    border-radius: 0.25em;
-    text-decoration: none;
-}
-.smd_textile_bar--icons a {
-    border-width: 0;
-    background: none;
-    padding: 0.35em 0.5em .25em;
-}
-.smd_textile_bar--buttons.smd_textile_bar--text {
-    background: none;
-    border: 0;
-    padding: 0 0 .3em 0;
-}
-.smd_textile_bar--buttons.smd_textile_bar--text a {
-    margin: .35em .35em 0 0;
-    border-radius: .35em;
-    background-color: inherit;
-    border-color: #ccc;
-}
-.smd_textile_bar--buttons.smd_textile_bar--text a:hover {
-    background-color: inherit;
-    border-color: #aaa;
-}
-.smd_textile_bar--buttons.smd_textile_bar--icons a {
-    border-width: 0;
-}
-.smd_textile_bar--icons [class^="smd-icon-"],
-.smd_textile_bar--icons [class*=" smd-icon-"] {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: none;
+.smd_textile_bar .ui-corner-all {
+    margin-bottom: 0.3em;
 }
 
 /* Tooltip styles */
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn {
+.smd_textile_bar-tooltips .smd_textile_bar_btn {
   position: relative;
 }
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::before,
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::after {
+.smd_textile_bar-tooltips .smd_textile_bar_btn::before,
+.smd_textile_bar-tooltips .smd_textile_bar_btn::after {
   text-transform: none;
   font-size: .9em;
   line-height: 1;
@@ -738,7 +518,7 @@ class smd_textile_bar
   left: 50%;
   transform: translate(-50%, -.25em);
 }
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::before {
+.smd_textile_bar-tooltips .smd_textile_bar_btn::before {
   content: '';
   border: 5px solid transparent;
   z-index: 1001;
@@ -746,7 +526,7 @@ class smd_textile_bar
   border-bottom-width: 0;
   border-top-color: #333;
 }
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn::after {
+.smd_textile_bar-tooltips .smd_textile_bar_btn::after {
   content: attr(title);
   text-align: center;
   min-width: 3em;
@@ -762,18 +542,48 @@ class smd_textile_bar
   z-index: 1000;
   bottom: calc(100% + 5px);
 }
-
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn:hover::before,
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn:hover::after {
+.smd_textile_bar-tooltips .smd_textile_bar_btn:hover::before,
+.smd_textile_bar-tooltips .smd_textile_bar_btn:hover::after {
   display: block;
   opacity: 1;
 }
 
 /* don't show empty tooltips */
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn[title='']::before,
-.smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn[title='']::after {
+.smd_textile_bar-tooltips .smd_textile_bar_btn[title='']::before,
+.smd_textile_bar-tooltips .smd_textile_bar_btn[title='']::after {
   display: none !important;
 }
+
+/* Icon set */
+.ui-icon-smd_textile_bar-strong { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m12 11.667h-4m4 0s3.333 0 3.333-3.333-3.333-3.333-3.333-3.333h-3.4c-.331 0-.6.269-.6.6v6.067m4-.001s4 0 4 3.667-4 3.667-4 3.667h-3.4c-.331 0-.6-.269-.6-.6v-6.733' fill='none' stroke='%23333' stroke-width='2'/%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-emphasis { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m11 5h3m3 0h-3m0 0-4 14m0 0h-3m3 0h3' fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-underline { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m16 5v6c0 2.209-1.791 4-4 4-2.209 0-4-1.791-4-4v-6'/%3E%3Cpath d='m6 19h12'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-strikethrough { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m16.3 6.8c-1.1-1.1-3-1.8-4.7-1.9-2.1 0-3.9.9-3.9 3.5 0 4.7 8.6 2.4 8.6 7.1 0 2.7-2.3 3.8-4.7 3.8-1.8-.1-3.7-.8-4.7-2.2'/%3E%3Cpath d='m4.5 11.7h14.2'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-heading { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m6.8 5v14'/%3E%3Cpath d='m17.2 5v14'/%3E%3Cpath d='m6.8 12h10.4'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-h1 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m21.5 12v7'/%3E%3Cpath d='m21.5 12-2.5 1.5'/%3E%3Cpath d='m13.7 5v14'/%3E%3Cpath d='m4.3 5v14'/%3E%3Cpath d='m4.3 12h9.4'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-h2 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m22.4 19h-4.2l2.9-3.5s1.8-1.9.1-3.1c-1.1-.8-2.2-.4-2.9.6'/%3E%3Cpath d='m13.7 5v14'/%3E%3Cpath d='m4.3 5v14'/%3E%3Cpath d='m4.3 12h9.4'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-h3 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m18.2 12h3.6c-.7.9-1.3 1.9-2 2.8h.2c1.4 0 2.4.9 2.4 2.1s-1.1 2.1-2.4 2.1c-.2 0-.6 0-1-.2-.3-.1-.7-.3-.8-.5'/%3E%3Cpath d='m13.7 5v14'/%3E%3Cpath d='m4.3 5v14'/%3E%3Cpath d='m4.3 12h9.4'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-h4 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m21.8 12-3.5 5.2h4.1v1.8'/%3E%3Cpath d='m13.7 5v14'/%3E%3Cpath d='m4.3 5v14'/%3E%3Cpath d='m4.3 12h9.4'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-h5 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m13.7 5v14'/%3E%3Cpath d='m4.3 5v14'/%3E%3Cpath d='m4.3 12h9.4'/%3E%3Cpath d='m21.8 12c-1.2 0-2.5 0-3.6 0v3.3c.3 0 .9-.2 1.6-.2h.1c1.5-.1 2.5.7 2.5 1.9 0 1.3-1.1 2.1-2.5 2.1-.2 0-.6 0-1-.2-.4-.1-.7-.4-.8-.5'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-h6 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m22.4 16.9c0 1.16-.985 2.1-2.2 2.1s-2.2-.94-2.2-2.1.985-2.1 2.2-2.1 2.2.94 2.2 2.1z'/%3E%3Cpath d='m20.3 12-2.1 3.8'/%3E%3Cpath d='m13.7 5v14'/%3E%3Cpath d='m4.3 5v14'/%3E%3Cpath d='m4.3 12h9.4'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-hx { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m13.7 5v14'/%3E%3Cpath d='m4.3 5v14'/%3E%3Cpath d='m4.3 12h9.4'/%3E%3Cpath d='m17.4 19 2.5-2.5m2.5-2.5-2.5 2.5m0 0-2.5-2.5m2.5 2.5 2.5 2.5'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-sup { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m6.5 9.8 8.2 8.2'/%3E%3Cpath d='m14.7 9.8-8.2 8.2'/%3E%3Cpath d='m22.4 13.4h-4.1l2.9-3.5s1.7-1.8.1-3c-1-.8-2.2-.3-2.9.6'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-sub { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m6.5 9.8 8.2 8.2'/%3E%3Cpath d='m14.7 9.8-8.2 8.2'/%3E%3Cpath d='m22.4 20.8h-4.1l2.9-3.5s1.7-1.8.1-3c-1-.8-2.2-.3-2.9.6'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-ul { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke-width='4'%3E%3Cpath d='M4 6v0'%3E%3C/path%3E%3Cpath d='M4 15.3v0'%3E%3C/path%3E%3C/g%3E%3Cg stroke-width='2'%3E%3Cpath d='M10.8 6h9.2'%3E%3C/path%3E%3Cpath d='M10.8 15.3h9.2'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-ol { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m10.8 6h9.2'/%3E%3Cpath d='m2.9 4.6 1.9-1.2v5.5'/%3E%3Cpath d='m6.1 18h-3.2l2.2-2.7s1.4-1.5.1-2.4c-.8-.6-1.7-.3-2.2.5'/%3E%3Cpath d='m10.8 15.3h9.2'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-acronym { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m22.5 15.5h-3.3'/%3E%3Cpath d='m22.5 8.5h-3.3'/%3E%3Cpath d='m20.8 15.5v-7'/%3E%3Cpath d='m15.8 8.6-3.2 3.9-3.2-4'/%3E%3Cpath d='m12.6 12.5v3'/%3E%3Cpath d='m1.5 8.5v7'/%3E%3Cpath d='m1.5 12h3.3'/%3E%3Cpath d='m1.5 8.5h4.5'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-ins { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m21.5 8.5h-2.2c-1 0-1.8.8-1.8 1.8s.8 1.8 1.8 1.8h1.5c1 0 1.8.8 1.8 1.8s-.8 1.8-1.8 1.8h-3.2'/%3E%3Cpath d='m4.8 15.5h-3.3'/%3E%3Cpath d='m4.8 8.5h-3.3'/%3E%3Cpath d='m3.1 15.5v-7'/%3E%3Cpath d='m8.5 15.5v-7l5.4 7v-7'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-del { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m9.8 8.5v7'/%3E%3Cpath d='m9.8 12h3.3'/%3E%3Cpath d='m9.8 15.5h4.5'/%3E%3Cpath d='m9.8 8.5h4.5'/%3E%3Cpath d='m17.5 15.5v-7'/%3E%3Cpath d='m22.3 15.5c-1.9 0-4 0-4.8 0'/%3E%3Cpath d='m1.5 12v-3.5c2.5 0 5 0 5 3.5s-2.5 3.5-5 3.5z'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-link { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m14 11.998c0-2.492-2.317-4.998-5.143-4.998-.335 0-1.438 0-1.714 0-2.84 0-5.143 2.238-5.143 4.998 0 2.378 1.71 4.369 4 4.874.368.081.75.124 1.143.124'/%3E%3Cpath d='m10 11.998c0 2.492 2.317 4.998 5.143 4.998h1.714c2.84 0 5.143-2.238 5.143-4.998 0-2.378-1.71-4.369-4-4.874-.368-.081-.75-.124-1.143-.124'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-code { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m13.5 6-3.5 12.5'/%3E%3Cpath d='m6.5 8.5-3.5 3.5 3.5 3.5'/%3E%3Cpath d='m17.5 8.5 3.5 3.5-3.5 3.5'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-bc { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m13 7.3-2.3 8.5'/%3E%3Cpath d='m8.2 9-2.3 2.3 2.3 2.3'/%3E%3Cpath d='m15.8 9 2.3 2.3-2.3 2.3'/%3E%3Cpath d='m2 17.9v-12.8c0-1.1.9-2.1 2-2.1h16c1.1 0 2 1 2 2.1v12.7c0 1.2-.9 2.1-2 2.1h-16c-1.1.1-2-.9-2-2z'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-bq { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-width='2'%3E%3Cpath d='m3 20.3v-15.3c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2h-11c-.6 0-1.2.3-1.6.8l-2.3 2.9c-.4.4-1.1.2-1.1-.4z'/%3E%3Cg stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16.5 10.5c.3 0 .5-.2.5-.5s-.2-.5-.5-.5-.5.2-.5.5.2.5.5.5z'/%3E%3Cpath d='m12 10.5c.3 0 .5-.2.5-.5s-.2-.5-.5-.5-.5.2-.5.5.2.5.5.5z'/%3E%3Cpath d='m7.5 10.5c.3 0 .5-.2.5-.5s-.2-.5-.5-.5-.5.2-.5.5.2.5.5.5z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-image { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m5 3h14c1.105 0 2 .895 2 2v14c0 1.105-.895 2-2 2h-14c-1.105 0-2-.895-2-2v-14c0-1.105.895-2 2-2z'/%3E%3Cpath d='m10 8.5c0 .828-.672 1.5-1.5 1.5s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5 1.5.672 1.5 1.5z'/%3E%3Cpath d='m21 15-5-5-11 11'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-file { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m9 12h3m3 0h-3m0 0v-3m0 3v3'/%3E%3Cpath d='m4 21.4v-18.8c0-.331.269-.6.6-.6h11.652c.159 0 .312.063.424.176l3.149 3.149c.113.113.176.265.176.424v15.651c0 .331-.269.6-.6.6h-14.8c-.331 0-.6-.269-.6-.6z'/%3E%3Cpath d='m16 5.4v-3.046c0-.195.158-.354.354-.354.094 0 .184.037.25.104l3.293 3.293c.066.066.104.156.104.25 0 .195-.158.354-.354.354h-3.046c-.331 0-.6-.269-.6-.6z'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-form { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m9 12h3m3 0h-3m0 0v-3m0 3v3'/%3E%3Cpath d='m11.7 1.173c.186-.107.414-.107.6 0l8.926 5.154c.186.107.3.305.3.52v10.307c0 .214-.114.412-.3.52l-8.926 5.154c-.186.107-.414.107-.6 0l-8.926-5.154c-.186-.107-.3-.305-.3-.52v-10.307c0-.214.114-.412.3-.52z'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-short-tag-circle { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m8 12h4m4 0h-4m0 0v-4m0 4v4'/%3E%3Cpath d='m12 22c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10z'/%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-strong_de { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-width='2'%3E%3Cpath d='m13.9 11.7h-5.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='m12.4 5h-3.8c-.3 0-.6.3-.6.6v6.1'/%3E%3Cg stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m8 19v-7.3'/%3E%3Cpath d='m15.4 5h-3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+.ui-icon-smd_textile_bar-emphasis_de { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='m9.9 5-2.9 14'/%3E%3Cpath d='m16.1 19-5.2-7.4'/%3E%3Cpath d='m18.2 5-10.1 9'/%3E%3C/g%3E%3C/svg%3E"); }
 EOCSS;
 
         return $styles;
