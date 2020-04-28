@@ -493,9 +493,9 @@ class smd_textile_bar
     {
         $styles = <<<EOCSS
 .smd_textile_bar .ui-icon {
-    width: 1.692307692307692em;
-    height: 1.692307692307692em;
-    background-size: 1.692307692307692em 1.692307692307692em;
+    width: 1.538461538461538em;
+    height: 1.538461538461538em;
+    background-size: 1.538461538461538em 1.538461538461538em;
 }
 
 /* Tooltip styles */
