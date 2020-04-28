@@ -386,7 +386,7 @@ class smd_textile_bar
 
         foreach ($fields as $field) {
             $html = array();
-            $html[] = '<div class="smd_textile_bar '.$field.' '.$class_str.'">';
+            $html[] = '<div class="ui-controlgroup ui-helper-clearfix smd_textile_bar '.$field.' '.$class_str.'">';
             $used_headings = array();
             $headings_done = false;
 
@@ -457,7 +457,7 @@ class smd_textile_bar
             $title = '';
         }
 
-        return '<a role="button" class="smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
+        return '<a role="button" class="ui-button smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
     }
 
     /**
@@ -480,81 +480,10 @@ class smd_textile_bar
     protected function getStyles()
     {
         $styles = <<<EOCSS
-.smd_textile_bar {
-    display: flex;
-    flex-wrap: wrap;
-}
 .smd_textile_bar .ui-icon {
-    width: 24px;
-    height: 24px;
-    background-size: 24px 24px;
-}
-/* TODO Phil: check all CSS below and revise where necessary */
-.smd_textile_bar--buttons a {
-    margin: 0.15em;
-    padding: 0.25em 0.5em;
-    border: 1px solid #888;
-    border-radius: 4px;
-    background: #ddd;
-    color: #333;
-}
-.smd_textile_bar--text,
-.smd_textile_bar--icons {
-    margin: 0;
-    padding: 0.2em;
-    border: 1px solid #ccc;
-    border-bottom-width: 0;
-    background-color: inherit;
-}
-body.darkmode .smd_textile_bar--text,
-body.darkmode .smd_textile_bar--icons {
-    border: 1px solid #222;
-}
-.smd_textile_bar--text a,
-.smd_textile_bar--icons a {
-    margin: 0 0.2em 0 0;
-    padding: 0.5em 0.65em;
-    color: #333;
-    font-size: 1em;
-    line-height: 1;
-}
-.smd_textile_bar--text a:hover,
-.smd_textile_bar--icons a:hover {
-    color: inherit;
-    border-radius: 0.25em;
-    text-decoration: none;
-}
-.smd_textile_bar--icons a {
-    border-width: 0;
-    background: none;
-    padding: 0.35em 0.5em .25em;
-}
-.smd_textile_bar--buttons.smd_textile_bar--text {
-    background: none;
-    border: 0;
-    padding: 0 0 .3em 0;
-}
-.smd_textile_bar--buttons.smd_textile_bar--text a {
-    margin: .35em .35em 0 0;
-    border-radius: .35em;
-    background-color: inherit;
-    border-color: #ccc;
-}
-.smd_textile_bar--buttons.smd_textile_bar--text a:hover {
-    background-color: inherit;
-    border-color: #aaa;
-}
-.smd_textile_bar--buttons.smd_textile_bar--icons a {
-    border-width: 0;
-}
-.smd_textile_bar--icons [class^="smd-icon-"],
-.smd_textile_bar--icons [class*=" smd-icon-"] {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: none;
+    width: 1.692307692307692em;
+    height: 1.692307692307692em;
+    background-size: 1.692307692307692em 1.692307692307692em;
 }
 
 /* Tooltip styles */
@@ -598,7 +527,6 @@ body.darkmode .smd_textile_bar--icons {
   z-index: 1000;
   bottom: calc(100% + 5px);
 }
-
 .smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn:hover::before,
 .smd_textile_bar--icons.smd_textile_bar--buttons .smd_textile_bar_btn:hover::after {
   display: block;
