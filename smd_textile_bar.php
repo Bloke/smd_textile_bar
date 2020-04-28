@@ -497,6 +497,9 @@ class smd_textile_bar
     height: 1.538461538461538em;
     background-size: 1.538461538461538em 1.538461538461538em;
 }
+.smd_textile_bar .ui-corner-all {
+    margin-bottom: 0.3em;
+}
 
 /* Tooltip styles */
 .smd_textile_bar-tooltips .smd_textile_bar_btn {
