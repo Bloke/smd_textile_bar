@@ -376,27 +376,35 @@ class smd_textile_bar
         }
 
         $separate_headings = get_pref('smd_textile_bar_headings');
+        $formlist = array_keys($this->getFormsOfType(get_pref('smd_textile_bar_form')));
 
         $js = '';
-        $aclass = array();
+        $class_str = '';
         $use_buttons = get_pref('smd_textile_bar_buttons');
         $use_icons = get_pref('smd_textile_bar_icons');
+
         if ($use_buttons) {
             if ($use_icons) {
-                $aclass[] = 'ui-controlgroup smd_textile_bar-tooltips';
+                $class_str = ' ui-controlgroup smd_textile_bar-tooltips';
             }
         } else {
-            $aclass[] = 'ui-controlgroup';
+            $class_str = ' ui-controlgroup';
         }
-        $class_str = implode(' ', $aclass);
 
+        // Loop for each textarea field.
         foreach ($fields as $field) {
             $html = array();
-            $html[] = '<div class="smd_textile_bar '.$field.' '.$class_str.'">';
+            $html[] = '<div class="smd_textile_bar '.$field.$class_str.'">';
+            $form_pref = 'smd_textile_bar_form_'.$field;
             $used_headings = array();
             $headings_done = false;
 
+            $form_dropdown = ($formlist) ? selectInput($form_pref, $formlist, get_pref($form_pref), false) : '';
+
+            // Prepare the buttons that'll appear on the bar.
             foreach ($buttons as $key => $opts) {
+                $dropdown = '';
+
                 if (!get_pref('smd_textile_bar_'.$key)) {
                     continue;
                 }
@@ -413,11 +421,15 @@ class smd_textile_bar
                         'level' => filter_var($used_headings[0], FILTER_SANITIZE_NUMBER_INT)
                     );
 
-                    $html[] = $this->getButton($field, 'hx', $head_opts, compact('use_icons', 'use_buttons'));
+                    $html[] = $this->getButton($field, 'hx', $head_opts, compact('use_icons', 'use_buttons', 'dropdown'));
                     $headings_done = true;
                 }
 
-                $html[] = $this->getButton($field, $key, $opts, compact('use_icons', 'use_buttons'));
+                if ($key === 'form') {
+                    $dropdown = $form_dropdown;
+                }
+
+                $html[] = $this->getButton($field, $key, $opts, compact('use_icons', 'use_buttons', 'dropdown'));
             }
 
             $html[] = '</div>';
@@ -450,26 +462,32 @@ class smd_textile_bar
     protected function getButton($field, $key, $opts, $extras)
     {
         $params = array();
+        $out = '';
+        $class = '';
+        $title = '';
+        $content = empty($extras['use_key']) ? gTxt('smd_textile_bar_btn_'.$key) : $key;
+        $opts['id'] = $field.'-'.$key;
 
         foreach ($opts as $data => $val) {
             $params[] = 'data-'.$data.'="'.htmlentities($val).'"';
         }
 
-        if ($extras['use_icons']) {
-            $content = '<span class="ui-icon ui-icon-smd_textile_bar-'.$key.'">'.gTxt('smd_textile_bar_btn_'.$key).'</span>';
-            $title = ' title="'.gTxt('smd_textile_bar_btn_'.$key).'"';
-            $class= '';
-        } else {
-            $content = gTxt('smd_textile_bar_btn_'.$key);
-            $title = '';
-            if ($extras['use_buttons']) {
-                $class= ' ui-corner-all';
-            } else {
-                $class= '';
+        if (empty($extras['use_icons'])) {
+            if (!empty($extras['use_buttons'])) {
+                $class = ' ui-corner-all';
             }
+        } else {
+            $content = '<span class="ui-icon ui-icon-smd_textile_bar-'.$key.'">'.$content.'</span>';
+            $title = ' title="'.gTxt('smd_textile_bar_btn_'.$key).'"';
         }
 
-        return '<a role="button" class="ui-button'.$class.' smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
+        $out = '<a role="button" class="ui-button'.$class.' smd_textile_bar_btn"'.$title.' href="#'.$field.'" '.implode(' ', $params).'>'.$content.'</a>';
+
+        if (!empty($extras['dropdown'])) {
+            $out = n.tag($out.n.$extras['dropdown'], 'span', array('class' => 'smd_textile_bar_group')).n;
+        }
+
+        return $out;
     }
 
     /**
@@ -883,6 +901,8 @@ EOCSS;
             const regex = /^<txp::([A-Za-z0-9_.\-]+)/gu;
             var parts = regex.exec(line);
 
+            var currentForm = $("[data-id='"+opt.id+"']").closest('[role=toolbar]').find('select option:selected').text();
+
             if (parts !== null) {
                 var capture = parts[1];
 
@@ -892,7 +912,7 @@ EOCSS;
                     opt.selection.end = lines.start+parts[0].length;
                     return;
                 } else {
-                    var toAdd = opt.before + form[0] + opt.after;
+                    var toAdd = opt.before + currentForm + opt.after;
                     insert(
                         (!is.paragraph ? "\\n\\n" : '') + toAdd,
                         lines.end + 2, lines.end + 2 + toAdd.length
@@ -902,7 +922,7 @@ EOCSS;
             }
 
             insert(
-                opt.before + form[0] + opt.after + line,
+                opt.before + currentForm + opt.after + line,
                 lines.start,
                 lines.end
             );
@@ -1009,10 +1029,19 @@ function smd_textile_bar_toggle(ev) {
     }
 }
 
-$(document).ready(function(){
+$(document).ready(function() {
     $("a.smd_textile_bar_btn").smd_textile_bar();
     $('.txp-textfilter-options .textfilter-value').on('change', smd_textile_bar_toggle).change();
 
+    var combo = jQuery('.smd_textile_bar_group'),
+        button = combo.find('.smd_textile_bar_set').button({
+            showLabel: false,
+            icon: 'ui-icon-triangle-1-s'
+        }),
+        menu = combo.find('select');
+
+    menu.hide().txpMenu(button);
+    combo.controlgroup();
 });
 
 EOJS;
