@@ -126,7 +126,6 @@ if (!defined('txpinterface'))
 
 if (txpinterface === 'admin') {
     $smd_textile_bar = new smd_textile_bar();
-    $smd_textile_bar->install();
 }
 
 class smd_textile_bar
@@ -174,17 +173,25 @@ class smd_textile_bar
             return;
         }
 
-        // If the installed plugin is the current one, skip installation.
-        $current = isset($prefs['smd_textile_bar_version']) ?
-            $prefs['smd_textile_bar_version'] : 'base';
-
-        if ($current == $this->version)
-            return;
+        // Version number unused at present but could be used
+        // for detecting upgrades in future.
+        $current = isset($prefs['smd_textile_bar_version'])
+            ? $prefs['smd_textile_bar_version']
+            : 'base';
 
         // Install the prefs.
         $position = 230;
 
-        $values['features'] = array_keys($this->buttons());
+        if (has_privs('prefs.'.$this->event.'.'.$this->event.'_features')) {
+            // Remove obsolete prefs.
+            safe_delete(
+                'txp_prefs',
+                "name LIKE 'rah\_textile\_bar\_h_' OR name='rah_textile_bar_codeline'"
+            );
+
+            $values['features'] = array_keys($this->buttons());
+        }
+
         $values['layout'] = array('body', 'excerpt', 'buttons', 'icons', 'headings');
 
         foreach ($values as $group => $set) {
@@ -209,12 +216,6 @@ class smd_textile_bar
                 $position++;
             }
         }
-
-        // Remove obsolete prefs.
-        safe_delete(
-            'txp_prefs',
-            "name LIKE 'rah\_textile\_bar\_h_' OR name='rah_textile_bar_codeline'"
-        );
 
         // Update the installed version number.
         set_pref('smd_textile_bar_version', $this->version, $this->event, 2, '', 0);
