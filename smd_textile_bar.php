@@ -391,6 +391,10 @@ class smd_textile_bar
             $class_str = ' ui-controlgroup';
         }
 
+        // Set this here just in case the fields aren't set properly or
+        // Textile isn't in use.
+        $used_headings = array();
+
         // Loop for each textarea field.
         foreach ($fields as $field) {
             $html = array();
