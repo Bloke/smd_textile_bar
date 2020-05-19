@@ -45,7 +45,7 @@ $plugin['type'] = '4';
 if (!defined('PLUGIN_HAS_PREFS')) define('PLUGIN_HAS_PREFS', 0x0001); // This plugin wants to receive "plugin_prefs.{$plugin['name']}" events
 if (!defined('PLUGIN_LIFECYCLE_NOTIFY')) define('PLUGIN_LIFECYCLE_NOTIFY', 0x0002); // This plugin wants to receive "plugin_lifecycle.{$plugin['name']}" events
 
-$plugin['flags'] = '3';
+$plugin['flags'] = '1';
 
 // Plugin 'textpack' is optional. It provides i18n strings to be used in conjunction with gTxt().
 // Syntax:
@@ -126,6 +126,7 @@ if (!defined('txpinterface'))
 
 if (txpinterface === 'admin') {
     $smd_textile_bar = new smd_textile_bar();
+    $smd_textile_bar->install();
 }
 
 class smd_textile_bar
@@ -141,15 +142,11 @@ class smd_textile_bar
     public function __construct()
     {
         add_privs('plugin_prefs.'.$this->event, $this->privs);
-        add_privs($this->event, $this->privs);
         add_privs('prefs.'.$this->event.'.'.$this->event.'_features', $this->privs);
         add_privs('prefs.'.$this->event.'.'.$this->event.'_layout', $this->all_privs);
 
         register_callback(array($this, 'prefs'), 'plugin_prefs.'.$this->event);
-        register_callback(array($this, 'install'), 'plugin_lifecycle.'.$this->event);
         register_callback(array($this, 'head'), 'admin_side', 'head_end');
-
-        $this->install();
     }
 
     /**
