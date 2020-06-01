@@ -888,7 +888,7 @@ EOCSS;
             }
 
             insert(
-                'h' + opt.level +'. ' + line + (!is.paragraph ? "\\n\\n" : ''),
+                'h' + opt.level +'. ' + line,
                 lines.start,
                 lines.end
             );
@@ -936,8 +936,7 @@ EOCSS;
 
         block : function() {
             insert(
-                opt['tag'] +'. ' + $.trim(lines.text.join("\\n")) +
-                (!is.paragraph ? "\\n\\n" : ''),
+                opt['tag'] +'. ' + $.trim(lines.text.join("\\n")),
                 lines.start,
                 lines.end
             );
