@@ -314,9 +314,11 @@ class smd_textile_bar
                 'callback' => 'acronym',
                 ),
             'form' => array(
-                'callback' => 'form',
-                'before'   => '<txp::',
-                'after'    => ' />',
+                'callback'     => 'form',
+                'before'       => '<txp::',
+                'after_open'   => '>',
+                'before_close' => '</txp::',
+                'after'        => ' />',
             ),
         );
     }
@@ -900,18 +902,43 @@ EOCSS;
 
         form : function() {
             var line = lines.text.join("\\n");
-            const regex = /^<txp::([A-Za-z0-9_.\-]+)/gu;
+            const regex = new RegExp('<txp::([A-Za-z0-9_.\-]+)', 'gu');
+            const regex_end = new RegExp('</txp::([A-Za-z0-9_.\-]+)', 'gu');
+
             var parts = regex.exec(line);
+            var parts_end = regex_end.exec(line);
 
             var currentForm = $("[data-id='"+opt.id+"']").closest('[role=toolbar]').find('select option:selected').text();
 
+            if (
+                is.empty &&
+                words.text.length == 1
+            ) {
+                opt.selection.start = words.start;
+                opt.selection.end = words.end;
+                opt.selection.text = words.text.join(' ');
+            }
+
+            // Replace existing tag in the current line.
             if (parts !== null) {
                 var capture = parts[1];
 
                 if ((pos = form.indexOf(capture)) > -1) {
+                    // Select next form in select list.
                     pos = (pos === (form.length)-1) ? 0 : pos+1;
-                    insert(opt.before + form[pos], lines.start, lines.start+parts[0].length);
-                    opt.selection.end = lines.start+parts[0].length;
+
+                    // Would be nice to handle both start and end tags in one
+                    // regex, but the maths is easier this way.
+                    if (parts_end !== null) {
+                        var begin = line.indexOf(parts_end[0]);
+                        insert(opt.before_close + form[pos], lines.start+begin, lines.start+begin+parts_end[0].length);
+                        opt.selection.end = lines.start+begin;
+                    }
+
+                    var begin = line.indexOf(parts[0]);
+                    insert(opt.before + form[pos], lines.start+begin, lines.start+begin+parts[0].length);
+                    opt.selection.end = lines.start+begin;
+
                     return;
                 } else {
                     var toAdd = opt.before + currentForm + opt.after;
@@ -923,11 +950,12 @@ EOCSS;
                 }
             }
 
-            insert(
-                opt.before + currentForm + opt.after + line,
-                lines.start,
-                lines.end
-            );
+            // Deal with inline form/wrapper.
+            var r = opt.selection.text
+                ? opt.before + currentForm + opt.after_open + opt.selection.text + opt.before_close + currentForm + opt.after_open
+                : opt.before + currentForm + opt.after;
+
+            insert(r);
         },
 
         /**
