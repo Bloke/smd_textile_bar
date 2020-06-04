@@ -347,7 +347,7 @@ class smd_textile_bar
      */
     protected function getFormsOfType($type)
     {
-        return safe_column('name', 'txp_form', "type='".doSlash($type)."'");
+        return safe_column('name', 'txp_form', "type='".doSlash($type)."' ORDER BY name");
     }
 
     /**
