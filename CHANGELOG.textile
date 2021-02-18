@@ -1,8 +1,16 @@
 h1. Changelog
 
-h2. 0.1.2 - 2020-04-27
+h2. 0.1.2-beta - 2021-02-18
 
+* New UI buttons (thanks, philwareham).
+* Handle inserting shortcodes as containers.
+* Form drop can be used to choose cycle start point.
+* Sort forms by name.
+* Remove automatic new paragraph for heading/block elements.
+* Optimise plugin callbacks.
 * Improve Dark Mode support (thanks, phiw13)
+* Fix private prefs for all users not just first user.
+* Prevent used_headings warning if bar is disabled.
 
 h2. 0.1.1 - 2020-04-26
 
