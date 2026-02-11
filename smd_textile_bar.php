@@ -328,7 +328,7 @@ class smd_textile_bar
      *
      * @return string HTML
      */
-    public function getFormTypes($key, $val)
+    public static function getFormTypes($key, $val)
     {
         $instance = Txp::get('Textpattern\Skin\Form');
 
